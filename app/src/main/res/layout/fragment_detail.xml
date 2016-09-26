@@ -1,0 +1,82 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    tools:context="com.singh.daman.popularmovies.DetailActivity">
+
+    <TextView
+        android:id="@+id/detail_name"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/ripple_material_light"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/detail_image"
+                    android:layout_width="200dp"
+                    android:layout_height="250dp"
+                    android:layout_margin="10dp"
+                    android:contentDescription="@string/poster"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/detail_year"
+                        style="@style/FontTheme"
+                        tools:text="@string/n_a"
+                        tools:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/detail_date"
+                        style="@style/FontTheme"
+                        tools:text="@string/n_a" />
+
+                    <TextView
+                        android:id="@+id/detail_vote"
+                        style="@style/FontTheme"
+                        tools:text="@string/n_a" />
+
+                    <TextView
+                        android:id="@+id/detail_trailer"
+                        style="@style/FontTheme"
+                        tools:text="@string/watch_trailer"
+                        tools:textColor="#0000EE"
+                        tools:textSize="18sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/detail_info"
+                style="@style/FontTheme"
+                tools:text="@string/n_a"
+                tools:textSize="16sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
