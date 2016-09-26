@@ -98,19 +98,4 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
         return movieslist;
     }
-
-//    public int getmoviesCount() {
-//        int num = 0;
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        try{
-//            String QUERY = "SELECT * FROM "+TABLE_MOVIES;
-//            Cursor cursor = db.rawQuery(QUERY, null);
-//            num = cursor.getCount();
-//            db.close();
-//            return num;
-//        }catch (Exception e){
-//            Log.e("error",e+"");
-//        }
-//        return 0;
-//    }
 }

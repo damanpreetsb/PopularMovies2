@@ -97,14 +97,6 @@ public class MoviesFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        id.add("1");
-        title.add("dakjsb");
-        moviesposter.add("http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-check-icon.png");
-        vote.add("jdb");
-        date.add("shdakan");
-        overview.add("jhsdabjk");
-
         Data();
 
         return rootView;
