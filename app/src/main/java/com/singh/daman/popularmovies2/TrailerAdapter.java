@@ -49,7 +49,8 @@ public class TrailerAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.trailer_layout, null);
 
         TextView title = (TextView) convertView.findViewById(R.id.trailer_text);
-        title.setText(key.get(position));
+        String str = "Trailer " + (position+1);
+        title.setText(str);
 
         return convertView;
     }
