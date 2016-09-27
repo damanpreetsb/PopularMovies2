@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -87,6 +88,14 @@ public class DetailActivity extends AppCompatActivity {
             listView = (ListView) rootView.findViewById(R.id.list);
             adapter = new TrailerAdapter(getContext(), key);
             listView.setAdapter(adapter);
+            listView.setOnTouchListener(new ListView.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    // Disallow the touch request for parent scroll on touch of child view
+                    v.getParent().requestDisallowInterceptTouchEvent(true);
+                    return false;
+                }
+            });
 
             Bundle extras = getActivity().getIntent().getExtras();
 
