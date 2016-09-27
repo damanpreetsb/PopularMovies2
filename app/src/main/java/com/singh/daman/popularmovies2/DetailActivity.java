@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,8 +71,9 @@ public class DetailActivity extends AppCompatActivity {
 
     public static class DetailFragment extends Fragment {
         String title;
-        ArrayList<String> key;
+        ArrayList<String> key = new ArrayList<String>();
         TextView trailer;
+        LinearLayout lm;
 
         public DetailFragment() {
             setHasOptionsMenu(true);
@@ -81,6 +84,9 @@ public class DetailActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
 
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+            lm = (LinearLayout) rootView.findViewById(R.id.linearTrailer);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
 
             Bundle extras = getActivity().getIntent().getExtras();
 
@@ -90,7 +96,6 @@ public class DetailActivity extends AppCompatActivity {
             title = extras.getString("EXTRA_TITLE");
             String vote = extras.getString("EXTRA_VOTE") + "/10";
             String id = extras.getString("EXTRA_ID");
-            System.out.println(id);
             Trailer(id);
 
             if (date.length() != 0 || overview.length() != 0) {
@@ -118,7 +123,6 @@ public class DetailActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     if (key.size() != 0) {
                         String str = key.get(0);
-                        System.out.println("str: " +str);
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + str)));
                     } else {
                         Toast.makeText(getContext(), "There is no trailer for this movie!", Toast.LENGTH_LONG).show();
@@ -153,9 +157,25 @@ public class DetailActivity extends AppCompatActivity {
             return shareIntent;
         }
 
+        private void TrailerLayout(ArrayList<String> key){
+
+            System.out.println("key size: " + key.size());
+            for(int j = 0;j < key.size(); j++)
+            {
+                LinearLayout ll = new LinearLayout(getContext());
+                ll.setOrientation(LinearLayout.HORIZONTAL);
+
+                TextView product = new TextView(getContext());
+                product.setText("Trailer " + j);
+                ll.addView(product);
+
+                lm.addView(ll);
+            }
+
+        }
+
         private void Trailer(final String idstr) {
             try {
-                key = new ArrayList<String>();
                 final String BASE_URL = "http://api.themoviedb.org/3/movie/" + idstr + "/videos?";
                 final String API_KEY_URL = "api_key=";
                 final String API_KEY = "78152e1f5dc1e0ca19063a06ea342fae";
@@ -167,7 +187,6 @@ public class DetailActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(String response) {
                                 try {
-                                    key.clear();
                                     JSONObject object = new JSONObject(response);
                                     String syncresponse = object.getString("results");
                                     JSONArray a1obj = new JSONArray(syncresponse);
@@ -178,6 +197,8 @@ public class DetailActivity extends AppCompatActivity {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
+                                key.notify();
+                                System.out.println("key: "+key+"key size: "+key.size());
                             }
                         }, new Response.ErrorListener() {
                     @Override
@@ -197,6 +218,8 @@ public class DetailActivity extends AppCompatActivity {
                 };
                 RequestQueue requestQueue = Volley.newRequestQueue(getContext());
                 requestQueue.add(stringRequest);
+                System.out.println("tgalle: "+ key.size());
+                TrailerLayout(key);
             } catch (Exception e) {
                 e.printStackTrace();
             }

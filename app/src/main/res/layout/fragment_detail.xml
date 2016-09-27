@@ -76,6 +76,12 @@
                 tools:text="@string/n_a"
                 tools:textSize="16sp" />
 
+            <ListView
+                android:id="@+id/list"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:dividerHeight="1dp" />
+
         </LinearLayout>
     </ScrollView>
 
