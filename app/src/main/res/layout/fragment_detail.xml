@@ -76,11 +76,11 @@
                 tools:text="@string/n_a"
                 tools:textSize="16sp" />
 
-            <ListView
+            <com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView
                 android:id="@+id/list"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:dividerHeight="1dp" />
+                android:padding="8dp"/>
 
         </LinearLayout>
     </ScrollView>

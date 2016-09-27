@@ -11,11 +11,9 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -73,7 +72,7 @@ public class DetailActivity extends AppCompatActivity {
         String title;
         ArrayList<String> key = new ArrayList<String>();
         TextView trailer;
-        ListView listView;
+        ExpandableHeightListView listView;
         TrailerAdapter adapter;
 
         public DetailFragment() {
@@ -85,17 +84,10 @@ public class DetailActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
 
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-            listView = (ListView) rootView.findViewById(R.id.list);
+            listView = (ExpandableHeightListView) rootView.findViewById(R.id.list);
             adapter = new TrailerAdapter(getContext(), key);
             listView.setAdapter(adapter);
-            listView.setOnTouchListener(new ListView.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    // Disallow the touch request for parent scroll on touch of child view
-                    v.getParent().requestDisallowInterceptTouchEvent(true);
-                    return false;
-                }
-            });
+            listView.setExpanded(true);
 
             Bundle extras = getActivity().getIntent().getExtras();
 
