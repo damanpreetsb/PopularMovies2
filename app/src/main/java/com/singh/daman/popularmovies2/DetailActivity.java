@@ -182,7 +182,6 @@ public class DetailActivity extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                                 adapter.notifyDataSetChanged();
-                                System.out.println("key: "+key+"key size: "+key.size());
                             }
                         }, new Response.ErrorListener() {
                     @Override

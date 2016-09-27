@@ -26,7 +26,6 @@ public class TrailerAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        System.out.println("adapter: "+key.size());
         return key.size();
     }
 
