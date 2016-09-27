@@ -175,7 +175,6 @@ public class DetailActivity extends AppCompatActivity {
                                         JSONObject obj = a1obj.getJSONObject(j);
                                         key.add(obj.getString("key"));
                                     }
-                                    System.out.println(key);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
