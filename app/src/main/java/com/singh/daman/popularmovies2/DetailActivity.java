@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
@@ -15,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,7 +72,8 @@ public class DetailActivity extends AppCompatActivity {
         String title;
         ArrayList<String> key = new ArrayList<String>();
         TextView trailer;
-        LinearLayout lm;
+        ListView listView;
+        TrailerAdapter adapter;
 
         public DetailFragment() {
             setHasOptionsMenu(true);
@@ -84,9 +84,9 @@ public class DetailActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
 
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-            lm = (LinearLayout) rootView.findViewById(R.id.linearTrailer);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
+            listView = (ListView) rootView.findViewById(R.id.list);
+            adapter = new TrailerAdapter(getContext(), key);
+            listView.setAdapter(adapter);
 
             Bundle extras = getActivity().getIntent().getExtras();
 
@@ -157,23 +157,6 @@ public class DetailActivity extends AppCompatActivity {
             return shareIntent;
         }
 
-        private void TrailerLayout(ArrayList<String> key){
-
-            System.out.println("key size: " + key.size());
-            for(int j = 0;j < key.size(); j++)
-            {
-                LinearLayout ll = new LinearLayout(getContext());
-                ll.setOrientation(LinearLayout.HORIZONTAL);
-
-                TextView product = new TextView(getContext());
-                product.setText("Trailer " + j);
-                ll.addView(product);
-
-                lm.addView(ll);
-            }
-
-        }
-
         private void Trailer(final String idstr) {
             try {
                 final String BASE_URL = "http://api.themoviedb.org/3/movie/" + idstr + "/videos?";
@@ -197,7 +180,7 @@ public class DetailActivity extends AppCompatActivity {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                key.notify();
+                                adapter.notifyDataSetChanged();
                                 System.out.println("key: "+key+"key size: "+key.size());
                             }
                         }, new Response.ErrorListener() {
@@ -218,8 +201,6 @@ public class DetailActivity extends AppCompatActivity {
                 };
                 RequestQueue requestQueue = Volley.newRequestQueue(getContext());
                 requestQueue.add(stringRequest);
-                System.out.println("tgalle: "+ key.size());
-                TrailerLayout(key);
             } catch (Exception e) {
                 e.printStackTrace();
             }
