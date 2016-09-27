@@ -64,7 +64,7 @@
                         style="@style/FontTheme"
                         tools:text="@string/watch_trailer"
                         tools:textColor="#0000EE"
-                        tools:textSize="18sp" />
+                        android:text="Watch Trailer" />
 
                 </LinearLayout>
 
