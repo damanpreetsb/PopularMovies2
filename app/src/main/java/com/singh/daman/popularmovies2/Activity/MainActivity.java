@@ -14,6 +14,7 @@ import com.singh.daman.popularmovies2.R;
 public class MainActivity extends AppCompatActivity implements MoviesFragment.Callback {
 
     private boolean mTwoPane;
+    private static final String DETAILFRAGMENT_TAG = "DFTAG";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements MoviesFragment.Ca
             mTwoPane = true;
             if (savedInstanceState == null) {
                 getSupportFragmentManager().beginTransaction()
-                        .add(R.id.container, new MoviesFragment())
+                        .replace(R.id.container, new MoviesFragment(), DETAILFRAGMENT_TAG)
                         .commit();
             }
         } else {
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements MoviesFragment.Ca
             args.putParcelable(DetailFragment.DETAIL_URI, contentUri);
             DetailFragment fragment = new DetailFragment();
             fragment.setArguments(args);
-            getSupportFragmentManager().beginTransaction().replace(R.id.containerdetail, fragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.movies_detail_container, fragment, DETAILFRAGMENT_TAG).commit();
         } else {
             Intent intent = new Intent(this, DetailActivity.class).setData(contentUri);
             startActivity(intent);

@@ -48,6 +48,7 @@ public class DetailFragment extends Fragment {
 
     public static final String DETAIL_URI = "URI";
     private Uri mUri;
+    private static final int DETAIL_LOADER = 0;
     String title;
     ArrayList<String> key = new ArrayList<String>();
     ArrayList<String> reviewtext = new ArrayList<String>();
@@ -98,6 +99,17 @@ public class DetailFragment extends Fragment {
         String id = extras.getString("EXTRA_ID");
         Trailer(id);
         Review(id);
+
+
+//        String image = ",n,mn,n,knnjb";
+//        String overview = "hgfhfv";
+//        String date = "2016-01-16";
+//        title = "jhfgkj";
+//        String vote = "4/10";
+//        String id = "18";
+//        Trailer(id);
+//        Review(id);
+
 
         if (date.length() != 0 || overview.length() != 0) {
 
