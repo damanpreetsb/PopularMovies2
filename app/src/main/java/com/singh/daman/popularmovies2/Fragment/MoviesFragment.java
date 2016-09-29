@@ -2,6 +2,7 @@ package com.singh.daman.popularmovies2.Fragment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -42,7 +43,6 @@ import java.util.Map;
  * Created by daman on 11/9/16.
  */
 public class MoviesFragment extends Fragment {
-
     private RecyclerView mRecyclerView;
     private MoviesAdapter mMoviesAdapter;
     ArrayList<String> moviesposter = new ArrayList<String>();
@@ -55,6 +55,10 @@ public class MoviesFragment extends Fragment {
     private DatabaseHandler handler;
 
     public MoviesFragment() {
+    }
+
+    public interface Callback {
+        void onItemSelected(Uri dateUri);
     }
 
     @Override
