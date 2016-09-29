@@ -27,7 +27,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
 import com.singh.daman.popularmovies2.R;
-import com.singh.daman.popularmovies2.TrailerAdapter;
+import com.singh.daman.popularmovies2.Adapter.TrailerAdapter;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;

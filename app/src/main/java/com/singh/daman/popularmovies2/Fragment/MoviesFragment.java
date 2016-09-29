@@ -25,8 +25,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.singh.daman.popularmovies2.Activity.DetailActivity;
 import com.singh.daman.popularmovies2.Database.DatabaseHandler;
-import com.singh.daman.popularmovies2.Movies;
-import com.singh.daman.popularmovies2.MoviesAdapter;
+import com.singh.daman.popularmovies2.Model.Movies;
+import com.singh.daman.popularmovies2.Adapter.MoviesAdapter;
 import com.singh.daman.popularmovies2.R;
 
 import org.json.JSONArray;

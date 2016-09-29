@@ -1,4 +1,4 @@
-package com.singh.daman.popularmovies2;
+package com.singh.daman.popularmovies2.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.singh.daman.popularmovies2.R;
 
 import java.util.ArrayList;
 

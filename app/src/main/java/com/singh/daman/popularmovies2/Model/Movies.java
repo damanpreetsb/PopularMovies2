@@ -1,4 +1,4 @@
-package com.singh.daman.popularmovies2;
+package com.singh.daman.popularmovies2.Model;
 
 /**
  * Created by daman on 27/9/16.

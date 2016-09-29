@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.singh.daman.popularmovies2.Movies;
+import com.singh.daman.popularmovies2.Model.Movies;
 
 import java.util.ArrayList;
 
