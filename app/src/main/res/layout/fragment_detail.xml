@@ -77,10 +77,17 @@
                 tools:textSize="16sp" />
 
             <com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView
-                android:id="@+id/list"
+                android:id="@+id/trailerlist"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"/>
+
+            <com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView
+                android:id="@+id/reviewlist"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"/>
+
 
         </LinearLayout>
     </ScrollView>

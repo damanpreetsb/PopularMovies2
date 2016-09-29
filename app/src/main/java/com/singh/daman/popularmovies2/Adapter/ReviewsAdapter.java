@@ -20,22 +20,22 @@ public class ReviewsAdapter extends BaseAdapter {
 
     private Activity activity;
     private LayoutInflater inflater;
-    private ArrayList<String> key;
+    private ArrayList<String> reviewlist;
     Context context;
 
-    public ReviewsAdapter(Context context, ArrayList<String> key) {
+    public ReviewsAdapter(Context context, ArrayList<String> reviewlist) {
         this.context = context;
-        this.key = key;
+        this.reviewlist = reviewlist;
     }
 
     @Override
     public int getCount() {
-        return key.size();
+        return reviewlist.size();
     }
 
     @Override
     public Object getItem(int location) {
-        return key.get(location);
+        return reviewlist.get(location);
     }
 
     @Override
@@ -53,8 +53,7 @@ public class ReviewsAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.trailer_layout, null);
 
         TextView title = (TextView) convertView.findViewById(R.id.trailer_text);
-        String str = "Review " + (position+1);
-        title.setText(str);
+        title.setText(reviewlist.get(position));
 
         return convertView;
     }

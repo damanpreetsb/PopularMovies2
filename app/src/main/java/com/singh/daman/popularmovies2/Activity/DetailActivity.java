@@ -27,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
+import com.singh.daman.popularmovies2.Adapter.ReviewsAdapter;
 import com.singh.daman.popularmovies2.R;
 import com.singh.daman.popularmovies2.Adapter.TrailerAdapter;
 import com.squareup.picasso.Picasso;
@@ -77,7 +78,9 @@ public class DetailActivity extends AppCompatActivity {
         ArrayList<String> reviewtext = new ArrayList<String>();
         TextView trailer;
         ExpandableHeightListView listView;
+        ExpandableHeightListView reviewlist;
         TrailerAdapter adapter;
+        ReviewsAdapter reviewsAdapter;
 
         public DetailFragment() {
             setHasOptionsMenu(true);
@@ -88,10 +91,15 @@ public class DetailActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
 
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-            listView = (ExpandableHeightListView) rootView.findViewById(R.id.list);
+            listView = (ExpandableHeightListView) rootView.findViewById(R.id.trailerlist);
             adapter = new TrailerAdapter(getContext(), key);
             listView.setAdapter(adapter);
             listView.setExpanded(true);
+
+            reviewlist = (ExpandableHeightListView) rootView.findViewById(R.id.reviewlist);
+            reviewsAdapter = new ReviewsAdapter(getContext(), reviewtext);
+            reviewlist.setAdapter(adapter);
+            reviewlist.setExpanded(true);
 
             Bundle extras = getActivity().getIntent().getExtras();
 
