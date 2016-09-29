@@ -133,18 +133,6 @@ public class DetailActivity extends AppCompatActivity {
 
             trailer = (TextView) rootView.findViewById(R.id.detail_trailer);
 
-            trailer.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (key.size() != 0) {
-                        String str = key.get(0);
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + str)));
-                    } else {
-                        Toast.makeText(getContext(), "There is no trailer for this movie!", Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
-
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
