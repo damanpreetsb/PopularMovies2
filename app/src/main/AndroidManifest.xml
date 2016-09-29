@@ -33,6 +33,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activity.MainActivity" />
         </activity>
+        <activity android:name=".Activity.FavouriteActivity"></activity>
     </application>
 
 </manifest>
