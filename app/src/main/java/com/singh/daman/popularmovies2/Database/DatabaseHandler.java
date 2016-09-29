@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class DatabaseHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "movies";
     private static final String TABLE_MOVIES = "moviestable";
     private static final String TABLE_FAVS = "favstable";
@@ -26,27 +26,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_VOTE = "vote";
     private static final String KEY_DATE = "date";
     private static final String KEY_OVERVIEW = "overview";
+    private static final String CREATE_MOVIES_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_MOVIES + "("
+            + KEY_ID + " INTEGER PRIMARY KEY," + KEY_TITLE + " TEXT,"
+            + KEY_IMAGE + " TEXT,"
+            + KEY_VOTE + " TEXT,"
+            + KEY_DATE + " TEXT,"
+            + KEY_OVERVIEW + " TEXT" + ")";
+    private static final String CREATE_FAV_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_FAVS + "("
+            + KEY_ID + " INTEGER PRIMARY KEY," + KEY_TITLE + " TEXT,"
+            + KEY_IMAGE + " TEXT,"
+            + KEY_VOTE + " TEXT,"
+            + KEY_DATE + " TEXT,"
+            + KEY_OVERVIEW + " TEXT" + ")";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-
     }
 
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_MOVIES_TABLE = "CREATE TABLE " + TABLE_MOVIES + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_TITLE + " TEXT,"
-                + KEY_IMAGE + " TEXT,"
-                + KEY_VOTE + " TEXT,"
-                + KEY_DATE + " TEXT,"
-                + KEY_OVERVIEW + " TEXT" + ")";
-        String CREATE_FAV_TABLE = "CREATE TABLE " + TABLE_FAVS + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_TITLE + " TEXT,"
-                + KEY_IMAGE + " TEXT,"
-                + KEY_VOTE + " TEXT,"
-                + KEY_DATE + " TEXT,"
-                + KEY_OVERVIEW + " TEXT" + ")";
         db.execSQL(CREATE_MOVIES_TABLE);
         db.execSQL(CREATE_FAV_TABLE);
     }
@@ -67,15 +66,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addFavs(Movies movies){
+    public void addFavs(String id, String title, String image, String vote, String date, String overview){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, movies.getId());
-        values.put(KEY_TITLE, movies.getTitle());
-        values.put(KEY_IMAGE, movies.getImage());
-        values.put(KEY_VOTE, movies.getVote());
-        values.put(KEY_DATE, movies.getDate());
-        values.put(KEY_OVERVIEW, movies.getOverview());
+        values.put(KEY_ID, id);
+        values.put(KEY_TITLE, title);
+        values.put(KEY_IMAGE, image);
+        values.put(KEY_VOTE, vote);
+        values.put(KEY_DATE, date);
+        values.put(KEY_OVERVIEW, overview);
 
         db.insert(TABLE_FAVS, null, values);
         db.close();
@@ -161,7 +160,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void deleteFav(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        db.execSQL("delete from "+TABLE_FAVS+" where"+KEY_ID+"='"+id+"'");
+        db.execSQL("delete from "+TABLE_FAVS+" where "+KEY_ID+"='"+id+"'");
     }
 
 

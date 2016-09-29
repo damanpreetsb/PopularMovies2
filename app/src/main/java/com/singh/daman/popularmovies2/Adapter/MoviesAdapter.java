@@ -20,6 +20,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import static com.singh.daman.popularmovies2.R.layout.movie;
+
 /**
  * Created by daman on 11/9/16.
  */
@@ -58,7 +60,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
     public MoviesAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v;
         MyViewHolder holder;
-        v = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie, parent, false);
+        v = LayoutInflater.from(parent.getContext()).inflate(movie, parent, false);
         holder = new MyViewHolder(v);
         holder.mCardView.setTag(holder);
         return holder;
@@ -81,7 +83,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
             holder.btnfav.setOnLikeListener(new OnLikeListener() {
                 @Override
                 public void liked(LikeButton likeButton) {
-                    handler.deleteFav(idpos);
+                    handler.addFavs(idpos ,
+                            title.get(holder.getAdapterPosition()), moviesposter.get(holder.getAdapterPosition()),
+                            vote.get(holder.getAdapterPosition()), date.get(holder.getAdapterPosition()),
+                            overview.get(holder.getAdapterPosition()));
                     holder.btnfav.setLiked(true);
                 }
 
