@@ -1,18 +1,17 @@
 package com.singh.daman.popularmovies2.Fragment;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -23,10 +22,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.singh.daman.popularmovies2.Activity.DetailActivity;
+import com.singh.daman.popularmovies2.Adapter.MoviesAdapter;
 import com.singh.daman.popularmovies2.Database.DatabaseHandler;
 import com.singh.daman.popularmovies2.Model.Movies;
-import com.singh.daman.popularmovies2.Adapter.MoviesAdapter;
 import com.singh.daman.popularmovies2.R;
 
 import org.json.JSONArray;
@@ -43,7 +41,7 @@ import java.util.Map;
  */
 public class MoviesFragment extends Fragment {
 
-    //private RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView;
     private MoviesAdapter mMoviesAdapter;
     ArrayList<String> moviesposter = new ArrayList<String>();
     ArrayList<String> overview = new ArrayList<String>();
@@ -84,26 +82,30 @@ public class MoviesFragment extends Fragment {
 
         handler = new DatabaseHandler(getContext());
 
-        mMoviesAdapter = new MoviesAdapter(getActivity(), id, moviesposter, overview, date, title, vote, favourite);
         View rootView = inflater.inflate(R.layout.fragment_movies, container, false);
-        GridView gridview = (GridView) rootView.findViewById(R.id.gridview);
-        gridview.setAdapter(mMoviesAdapter);
 
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), DetailActivity.class);
-                Bundle extras = new Bundle();
-                extras.putString("EXTRA_IMAGE", moviesposter.get(i));
-                extras.putString("EXTRA_OVERVIEW", overview.get(i));
-                extras.putString("EXTRA_DATE", date.get(i));
-                extras.putString("EXTRA_TITLE", title.get(i));
-                extras.putString("EXTRA_VOTE", vote.get(i));
-                extras.putString("EXTRA_ID", id.get(i));
-                intent.putExtras(extras);
-                startActivity(intent);
-            }
-        });
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.moviesrecyclerview);
+        mRecyclerView.setHasFixedSize(true);
+        GridLayoutManager llm = new GridLayoutManager(getActivity(), 2);
+        mRecyclerView.setLayoutManager(llm);
+
+        mMoviesAdapter = new MoviesAdapter(getActivity(), id, moviesposter, overview, date, title, vote, favourite);
+
+//        mRecyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                Intent intent = new Intent(getActivity(), DetailActivity.class);
+//                Bundle extras = new Bundle();
+//                extras.putString("EXTRA_IMAGE", moviesposter.get(i));
+//                extras.putString("EXTRA_OVERVIEW", overview.get(i));
+//                extras.putString("EXTRA_DATE", date.get(i));
+//                extras.putString("EXTRA_TITLE", title.get(i));
+//                extras.putString("EXTRA_VOTE", vote.get(i));
+//                extras.putString("EXTRA_ID", id.get(i));
+//                intent.putExtras(extras);
+//                startActivity(intent);
+//            }
+//        });
         Data();
 
         return rootView;
