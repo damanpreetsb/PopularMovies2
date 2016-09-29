@@ -21,11 +21,13 @@ public class ReviewsAdapter extends BaseAdapter {
     private Activity activity;
     private LayoutInflater inflater;
     private ArrayList<String> reviewlist;
+    private ArrayList<String> reviewauthor;
     Context context;
 
-    public ReviewsAdapter(Context context, ArrayList<String> reviewlist) {
+    public ReviewsAdapter(Context context, ArrayList<String> reviewlist, ArrayList<String> reviewauthor) {
         this.context = context;
         this.reviewlist = reviewlist;
+        this.reviewauthor = reviewauthor;
     }
 
     @Override
@@ -50,10 +52,12 @@ public class ReviewsAdapter extends BaseAdapter {
             inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null)
-            convertView = inflater.inflate(R.layout.trailer_layout, null);
+            convertView = inflater.inflate(R.layout.review_layout, null);
 
-        TextView title = (TextView) convertView.findViewById(R.id.trailer_text);
-        title.setText(reviewlist.get(position));
+        TextView title = (TextView) convertView.findViewById(R.id.review_author);
+        TextView content = (TextView) convertView.findViewById(R.id.review_content);
+        title.setText(reviewauthor.get(position));
+        content.setText(reviewlist.get(position));
 
         return convertView;
     }

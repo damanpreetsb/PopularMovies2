@@ -76,6 +76,7 @@ public class DetailActivity extends AppCompatActivity {
         String title;
         ArrayList<String> key = new ArrayList<String>();
         ArrayList<String> reviewtext = new ArrayList<String>();
+        ArrayList<String> reviewauthor = new ArrayList<String>();
         TextView trailer;
         ExpandableHeightListView listView;
         ExpandableHeightListView reviewlist;
@@ -97,8 +98,8 @@ public class DetailActivity extends AppCompatActivity {
             listView.setExpanded(true);
 
             reviewlist = (ExpandableHeightListView) rootView.findViewById(R.id.reviewlist);
-            reviewsAdapter = new ReviewsAdapter(getContext(), reviewtext);
-            reviewlist.setAdapter(adapter);
+            reviewsAdapter = new ReviewsAdapter(getContext(), reviewtext, reviewauthor);
+            reviewlist.setAdapter(reviewsAdapter);
             reviewlist.setExpanded(true);
 
             Bundle extras = getActivity().getIntent().getExtras();
@@ -110,6 +111,7 @@ public class DetailActivity extends AppCompatActivity {
             String vote = extras.getString("EXTRA_VOTE") + "/10";
             String id = extras.getString("EXTRA_ID");
             Trailer(id);
+            Review(id);
 
             if (date.length() != 0 || overview.length() != 0) {
 
@@ -244,6 +246,7 @@ public class DetailActivity extends AppCompatActivity {
                                     JSONArray a1obj = new JSONArray(syncresponse);
                                     for (int j = 0; j < a1obj.length(); j++) {
                                         JSONObject obj = a1obj.getJSONObject(j);
+                                        reviewauthor.add(obj.getString("author"));
                                         reviewtext.add(obj.getString("content"));
                                     }
                                 } catch (JSONException e) {
