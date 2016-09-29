@@ -1,4 +1,4 @@
-package com.singh.daman.popularmovies2;
+package com.singh.daman.popularmovies2.Fragment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,6 +25,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.singh.daman.popularmovies2.Activity.DetailActivity;
 import com.singh.daman.popularmovies2.Database.DatabaseHandler;
+import com.singh.daman.popularmovies2.Movies;
+import com.singh.daman.popularmovies2.MoviesAdapter;
+import com.singh.daman.popularmovies2.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

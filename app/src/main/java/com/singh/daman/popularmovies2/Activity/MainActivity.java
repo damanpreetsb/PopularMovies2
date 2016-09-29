@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.singh.daman.popularmovies2.MoviesFragment;
+import com.singh.daman.popularmovies2.Fragment.MoviesFragment;
 import com.singh.daman.popularmovies2.R;
 
 public class MainActivity extends AppCompatActivity {
