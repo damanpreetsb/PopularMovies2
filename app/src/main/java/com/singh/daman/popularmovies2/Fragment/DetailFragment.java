@@ -3,6 +3,7 @@ package com.singh.daman.popularmovies2.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.ShareActionProvider;
@@ -44,6 +45,9 @@ import java.util.Map;
  */
 
 public class DetailFragment extends Fragment {
+
+    public static final String DETAIL_URI = "URI";
+    private Uri mUri;
     String title;
     ArrayList<String> key = new ArrayList<String>();
     ArrayList<String> reviewtext = new ArrayList<String>();
@@ -57,6 +61,17 @@ public class DetailFragment extends Fragment {
     public DetailFragment() {
         setHasOptionsMenu(true);
     }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle arguments = getArguments();
+
+        if (arguments != null) {
+            mUri = arguments.getParcelable(DetailFragment.DETAIL_URI);
+        }
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
