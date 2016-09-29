@@ -18,4 +18,5 @@
     <string name="n_a">N/A</string>
     <string name="watch_trailer">Watch Trailer</string>
     <string name="poster">Poster</string>
+    <string name="favourite">Favourite</string>
 </resources>
