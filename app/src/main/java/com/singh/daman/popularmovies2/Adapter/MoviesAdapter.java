@@ -1,14 +1,19 @@
 package com.singh.daman.popularmovies2.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.like.IconType;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
+import com.singh.daman.popularmovies2.Activity.DetailActivity;
 import com.singh.daman.popularmovies2.Database.DatabaseHandler;
 import com.singh.daman.popularmovies2.R;
 import com.squareup.picasso.Picasso;
@@ -18,9 +23,24 @@ import java.util.ArrayList;
 /**
  * Created by daman on 11/9/16.
  */
-public class MoviesAdapter extends BaseAdapter {
+public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHolder> {
     private Context mContext;
     private ArrayList<String> id, moviesposter, overview, date, title, vote, favourite;
+
+     class MyViewHolder extends RecyclerView.ViewHolder {
+
+         ImageView imageView;
+         LikeButton btnfav;
+         CardView mCardView;
+
+         MyViewHolder(View v) {
+            super(v);
+            mCardView = (CardView) v.findViewById(R.id.card_view);
+            imageView = (ImageView) v.findViewById(R.id.grid_image);
+            btnfav = (LikeButton) v.findViewById(R.id.fav_button);
+            btnfav.setIcon(IconType.Star);
+        }
+    }
 
     public MoviesAdapter(Context c, ArrayList<String> id,
                          ArrayList<String> moviesposter, ArrayList<String> overview,
@@ -37,69 +57,66 @@ public class MoviesAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
-        return moviesposter.size();
+    public MoviesAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v;
+        MyViewHolder holder;
+        v = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie, parent, false);
+        holder = new MyViewHolder(v);
+        holder.mCardView.setTag(holder);
+        return holder;
     }
 
     @Override
-    public Object getItem(int position) {
-        return null;
-    }
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
+        try {
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
+            Picasso.with(mContext)
+                    .load(moviesposter.get(position))
+                    .placeholder(R.drawable.loading).fit()
+                    .into(holder.imageView);
 
-    public static class ViewHolder {
-        public final ImageView imageView;
-        public LikeButton btnfav;
-
-        public ViewHolder(View view){
-            imageView = (ImageView) view.findViewById(R.id.grid_image);
-            btnfav = (LikeButton) view.findViewById(R.id.fav_button);
-        }
-    }
-
-    @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-
-        View grid;
-        LayoutInflater inflater = (LayoutInflater) mContext
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        if (convertView == null) {
-
-            grid = new View(mContext);
-            grid = inflater.inflate(R.layout.movie, null);
-
-        } else {
-            grid = (View) convertView;
-        }
-        final ViewHolder holder = new ViewHolder(grid);
-        Picasso.with(mContext).load(moviesposter.get(position)).placeholder(R.drawable.loading).fit().into(holder.imageView);
-        if(favourite.get(position).equals("YES")){
-            holder.btnfav.setLiked(true);
-        }
-        else
-            holder.btnfav.setLiked(false);
-        holder.btnfav.setOnLikeListener(new OnLikeListener() {
-            @Override
-            public void liked(LikeButton likeButton) {
+            if (favourite.get(position).equals("YES")) {
                 holder.btnfav.setLiked(true);
-                DatabaseHandler handler = new DatabaseHandler(mContext);
-                handler.favUpdate("YES", id.get(position));
-                favourite.set(position, "YES");
-            }
-
-            @Override
-            public void unLiked(LikeButton likeButton) {
-                DatabaseHandler handler = new DatabaseHandler(mContext);
-                handler.favUpdate("NO", id.get(position));
-                favourite.set(position, "NO");
+            } else
                 holder.btnfav.setLiked(false);
-            }
-        });
-        return grid;
+            holder.btnfav.setOnLikeListener(new OnLikeListener() {
+                @Override
+                public void liked(LikeButton likeButton) {
+                    DatabaseHandler handler = new DatabaseHandler(mContext);
+                    handler.favUpdate("YES", id.get(holder.getAdapterPosition()));
+                    favourite.set(holder.getAdapterPosition(), "YES");
+                }
+
+                @Override
+                public void unLiked(LikeButton likeButton) {
+                    DatabaseHandler handler = new DatabaseHandler(mContext);
+                    handler.favUpdate("NO", id.get(holder.getAdapterPosition()));
+                    favourite.set(holder.getAdapterPosition(), "NO");
+                }
+            });
+            holder.mCardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, DetailActivity.class);
+                    Bundle extras = new Bundle();
+                    extras.putString("EXTRA_IMAGE", moviesposter.get(holder.getAdapterPosition()));
+                    extras.putString("EXTRA_OVERVIEW", overview.get(holder.getAdapterPosition()));
+                    extras.putString("EXTRA_DATE", date.get(holder.getAdapterPosition()));
+                    extras.putString("EXTRA_TITLE", title.get(holder.getAdapterPosition()));
+                    extras.putString("EXTRA_VOTE", vote.get(holder.getAdapterPosition()));
+                    extras.putString("EXTRA_ID", id.get(holder.getAdapterPosition()));
+                    intent.putExtras(extras);
+                    mContext.startActivity(intent);
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return id.size();
     }
 }

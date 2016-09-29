@@ -90,22 +90,7 @@ public class MoviesFragment extends Fragment {
         mRecyclerView.setLayoutManager(llm);
 
         mMoviesAdapter = new MoviesAdapter(getActivity(), id, moviesposter, overview, date, title, vote, favourite);
-
-//        mRecyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Intent intent = new Intent(getActivity(), DetailActivity.class);
-//                Bundle extras = new Bundle();
-//                extras.putString("EXTRA_IMAGE", moviesposter.get(i));
-//                extras.putString("EXTRA_OVERVIEW", overview.get(i));
-//                extras.putString("EXTRA_DATE", date.get(i));
-//                extras.putString("EXTRA_TITLE", title.get(i));
-//                extras.putString("EXTRA_VOTE", vote.get(i));
-//                extras.putString("EXTRA_ID", id.get(i));
-//                intent.putExtras(extras);
-//                startActivity(intent);
-//            }
-//        });
+        mRecyclerView.setAdapter(mMoviesAdapter);
         Data();
 
         return rootView;
