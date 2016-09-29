@@ -74,6 +74,7 @@ public class DetailActivity extends AppCompatActivity {
     public static class DetailFragment extends Fragment {
         String title;
         ArrayList<String> key = new ArrayList<String>();
+        ArrayList<String> reviewtext = new ArrayList<String>();
         TextView trailer;
         ExpandableHeightListView listView;
         TrailerAdapter adapter;
@@ -188,6 +189,54 @@ public class DetailActivity extends AppCompatActivity {
                                     for (int j = 0; j < a1obj.length(); j++) {
                                         JSONObject obj = a1obj.getJSONObject(j);
                                         key.add(obj.getString("key"));
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                adapter.notifyDataSetChanged();
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (error instanceof NoConnectionError) {
+                            Toast.makeText(getContext(), "No internet connections!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }) {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        headers.put("Content-Type", "application/json");
+                        return headers;
+                    }
+
+                };
+                RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+                requestQueue.add(stringRequest);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        private void Review(final String idstr) {
+            try {
+                final String BASE_URL = "http://api.themoviedb.org/3/movie/" + idstr + "/reviews?";
+                final String API_KEY_URL = "api_key=";
+                final String API_KEY = "78152e1f5dc1e0ca19063a06ea342fae";
+
+                String url = BASE_URL + API_KEY_URL + API_KEY;
+                StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                        url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject object = new JSONObject(response);
+                                    String syncresponse = object.getString("results");
+                                    JSONArray a1obj = new JSONArray(syncresponse);
+                                    for (int j = 0; j < a1obj.length(); j++) {
+                                        JSONObject obj = a1obj.getJSONObject(j);
+                                        reviewtext.add(obj.getString("content"));
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
