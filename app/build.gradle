@@ -26,4 +26,5 @@ dependencies {
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.github.paolorotolo:expandableheightlistview:1.0.0'
+    compile 'com.github.jd-alexander:LikeButton:0.2.0'
 }

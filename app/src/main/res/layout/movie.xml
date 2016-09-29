@@ -1,12 +1,27 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:id="@+id/grid_image"
         android:layout_width="200dp"
-        android:layout_height="250dp">
-    </ImageView>
+        android:layout_height="250dp"
+        android:alpha="0.8" />
 
-</LinearLayout>
+    <com.like.LikeButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fav_button"
+        app:icon_type="star"
+        app:circle_start_color="@color/colorPrimary"
+        app:dots_primary_color="@color/colorAccent"
+        app:dots_secondary_color="@color/colorPrimary"
+        app:circle_end_color="@color/colorAccent"
+        app:icon_size="25dp"
+        app:liked="false"
+        app:anim_scale_factor="2"
+        app:is_enabled="false" />
+
+
+</FrameLayout>
