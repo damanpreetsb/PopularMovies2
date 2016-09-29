@@ -43,6 +43,7 @@ import java.util.Map;
  */
 public class MoviesFragment extends Fragment {
 
+    //private RecyclerView mRecyclerView;
     private MoviesAdapter mMoviesAdapter;
     ArrayList<String> moviesposter = new ArrayList<String>();
     ArrayList<String> overview = new ArrayList<String>();
@@ -50,6 +51,7 @@ public class MoviesFragment extends Fragment {
     ArrayList<String> title = new ArrayList<String>();
     ArrayList<String> vote = new ArrayList<String>();
     ArrayList<String> id = new ArrayList<String>();
+    ArrayList<String> favourite = new ArrayList<>();
     private DatabaseHandler handler;
 
     public MoviesFragment() {
@@ -82,7 +84,7 @@ public class MoviesFragment extends Fragment {
 
         handler = new DatabaseHandler(getContext());
 
-        mMoviesAdapter = new MoviesAdapter(getActivity(), moviesposter, overview, date, title, vote);
+        mMoviesAdapter = new MoviesAdapter(getActivity(), id, moviesposter, overview, date, title, vote, favourite);
         View rootView = inflater.inflate(R.layout.fragment_movies, container, false);
         GridView gridview = (GridView) rootView.findViewById(R.id.gridview);
         gridview.setAdapter(mMoviesAdapter);
@@ -120,6 +122,7 @@ public class MoviesFragment extends Fragment {
         vote.clear();
         date.clear();
         overview.clear();
+        favourite.clear();
         ArrayList<Movies> moviesArrayList = handler.getAllMovies();
         for (int i = 0; i < moviesArrayList.size(); i++){
             Movies movies = moviesArrayList.get(i);
@@ -129,6 +132,7 @@ public class MoviesFragment extends Fragment {
                 vote.add(movies.getVote());
                 date.add(movies.getDate());
                 overview.add(movies.getOverview());
+                favourite.add(movies.getFavourite());
         }
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         final String order = prefs.getString(getString(R.string.pref_order_key),
@@ -140,6 +144,7 @@ public class MoviesFragment extends Fragment {
             Collections.reverse(vote);
             Collections.reverse(date);
             Collections.reverse(id);
+            Collections.reverse(favourite);
         }
         mMoviesAdapter.notifyDataSetChanged();
     }
@@ -177,6 +182,7 @@ public class MoviesFragment extends Fragment {
                                     movies.setVote(obj.getString("vote_average"));
                                     movies.setDate(obj.getString("release_date"));
                                     movies.setOverview(obj.getString("overview"));
+                                    movies.setFavourite("NO");
                                     handler.addMovies(movies);
                                 }
                             } catch (JSONException e) {

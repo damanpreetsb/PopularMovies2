@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.like.LikeButton;
+import com.like.OnLikeListener;
+import com.singh.daman.popularmovies2.Database.DatabaseHandler;
 import com.singh.daman.popularmovies2.R;
 import com.squareup.picasso.Picasso;
 
@@ -17,16 +20,20 @@ import java.util.ArrayList;
  */
 public class MoviesAdapter extends BaseAdapter {
     private Context mContext;
-    private ArrayList<String> moviesposter, overview, date, title, vote;
+    private ArrayList<String> id, moviesposter, overview, date, title, vote, favourite;
 
-    public MoviesAdapter(Context c, ArrayList<String> moviesposter, ArrayList<String> overview,
-                         ArrayList<String> date, ArrayList<String> title, ArrayList<String> vote) {
+    public MoviesAdapter(Context c, ArrayList<String> id,
+                         ArrayList<String> moviesposter, ArrayList<String> overview,
+                         ArrayList<String> date, ArrayList<String> title, ArrayList<String> vote,
+                         ArrayList<String> favourite) {
         mContext = c;
+        this.id = id;
         this.moviesposter = moviesposter;
         this.overview = overview;
         this.date = date;
         this.title = title;
         this.vote = vote;
+        this.favourite = favourite;
     }
 
     @Override
@@ -46,14 +53,16 @@ public class MoviesAdapter extends BaseAdapter {
 
     public static class ViewHolder {
         public final ImageView imageView;
+        public LikeButton btnfav;
 
         public ViewHolder(View view){
             imageView = (ImageView) view.findViewById(R.id.grid_image);
+            btnfav = (LikeButton) view.findViewById(R.id.fav_button);
         }
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         View grid;
         LayoutInflater inflater = (LayoutInflater) mContext
@@ -67,9 +76,30 @@ public class MoviesAdapter extends BaseAdapter {
         } else {
             grid = (View) convertView;
         }
-        ViewHolder holder = new ViewHolder(grid);
+        final ViewHolder holder = new ViewHolder(grid);
         Picasso.with(mContext).load(moviesposter.get(position)).placeholder(R.drawable.loading).fit().into(holder.imageView);
+        if(favourite.get(position).equals("YES")){
+            holder.btnfav.setLiked(true);
+        }
+        else
+            holder.btnfav.setLiked(false);
+        holder.btnfav.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                holder.btnfav.setLiked(true);
+                DatabaseHandler handler = new DatabaseHandler(mContext);
+                handler.favUpdate("YES", id.get(position));
+                favourite.set(position, "YES");
+            }
 
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                DatabaseHandler handler = new DatabaseHandler(mContext);
+                handler.favUpdate("NO", id.get(position));
+                favourite.set(position, "NO");
+                holder.btnfav.setLiked(false);
+            }
+        });
         return grid;
     }
 }

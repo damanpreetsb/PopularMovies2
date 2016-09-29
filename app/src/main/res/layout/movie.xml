@@ -15,13 +15,15 @@
         android:id="@+id/fav_button"
         app:icon_type="star"
         app:circle_start_color="@color/colorPrimary"
+        app:like_drawable="@drawable/thumb_on"
+        app:unlike_drawable="@drawable/thumb_off"
         app:dots_primary_color="@color/colorAccent"
         app:dots_secondary_color="@color/colorPrimary"
         app:circle_end_color="@color/colorAccent"
-        app:icon_size="25dp"
-        app:liked="false"
+        app:icon_size="50dp"
+        app:liked="true"
         app:anim_scale_factor="2"
-        app:is_enabled="false" />
-
+        app:is_enabled="false"
+        android:layout_gravity="end" />
 
 </FrameLayout>
