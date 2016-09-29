@@ -1,10 +1,13 @@
-package com.singh.daman.popularmovies2;
+package com.singh.daman.popularmovies2.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.singh.daman.popularmovies2.MoviesFragment;
+import com.singh.daman.popularmovies2.R;
 
 public class MainActivity extends AppCompatActivity {
 

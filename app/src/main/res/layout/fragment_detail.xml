@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
-    tools:context="com.singh.daman.popularmovies2.DetailActivity">
+    tools:context="com.singh.daman.popularmovies2.Activity.DetailActivity">
 
     <TextView
         android:id="@+id/detail_name"

@@ -1,4 +1,4 @@
-package com.singh.daman.popularmovies2;
+package com.singh.daman.popularmovies2.Activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.singh.daman.popularmovies2.R;
 
 public class SettingsActivity extends PreferenceActivity
         implements Preference.OnPreferenceChangeListener {

@@ -1,4 +1,4 @@
-package com.singh.daman.popularmovies2;
+package com.singh.daman.popularmovies2.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.singh.daman.popularmovies2.Movies;
 
 import java.util.ArrayList;
 

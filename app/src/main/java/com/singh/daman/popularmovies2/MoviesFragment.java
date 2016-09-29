@@ -23,6 +23,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.singh.daman.popularmovies2.Activity.DetailActivity;
+import com.singh.daman.popularmovies2.Database.DatabaseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
