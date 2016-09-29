@@ -70,29 +70,28 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.MyVi
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         try {
-
+            final DatabaseHandler handler = new DatabaseHandler(mContext);
             Picasso.with(mContext)
                     .load(moviesposter.get(position))
                     .placeholder(R.drawable.loading).fit()
                     .into(holder.imageView);
+            final String idpos = id.get(position);
 
-            if (favourite.get(position).equals("YES")) {
+            if (handler.CheckIsFAv(idpos)) {
                 holder.btnfav.setLiked(true);
             } else
                 holder.btnfav.setLiked(false);
             holder.btnfav.setOnLikeListener(new OnLikeListener() {
                 @Override
                 public void liked(LikeButton likeButton) {
-                    DatabaseHandler handler = new DatabaseHandler(mContext);
-                    handler.favUpdate("YES", id.get(holder.getAdapterPosition()));
-                    favourite.set(holder.getAdapterPosition(), "YES");
+                    handler.deleteFav(idpos);
+                    holder.btnfav.setLiked(true);
                 }
 
                 @Override
                 public void unLiked(LikeButton likeButton) {
-                    DatabaseHandler handler = new DatabaseHandler(mContext);
-                    handler.favUpdate("NO", id.get(holder.getAdapterPosition()));
-                    favourite.set(holder.getAdapterPosition(), "NO");
+                    handler.deleteFav(idpos);
+                    holder.btnfav.setLiked(false);
                 }
             });
             holder.mCardView.setOnClickListener(new View.OnClickListener() {

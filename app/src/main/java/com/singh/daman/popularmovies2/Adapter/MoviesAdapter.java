@@ -25,7 +25,7 @@ import java.util.ArrayList;
  */
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHolder> {
     private Context mContext;
-    private ArrayList<String> id, moviesposter, overview, date, title, vote, favourite;
+    private ArrayList<String> id, moviesposter, overview, date, title, vote;
 
      class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -44,8 +44,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
 
     public MoviesAdapter(Context c, ArrayList<String> id,
                          ArrayList<String> moviesposter, ArrayList<String> overview,
-                         ArrayList<String> date, ArrayList<String> title, ArrayList<String> vote,
-                         ArrayList<String> favourite) {
+                         ArrayList<String> date, ArrayList<String> title, ArrayList<String> vote) {
         mContext = c;
         this.id = id;
         this.moviesposter = moviesposter;
@@ -53,7 +52,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
         this.date = date;
         this.title = title;
         this.vote = vote;
-        this.favourite = favourite;
     }
 
     @Override
@@ -69,29 +67,28 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         try {
-
+            final DatabaseHandler handler = new DatabaseHandler(mContext);
             Picasso.with(mContext)
                     .load(moviesposter.get(position))
                     .placeholder(R.drawable.loading).fit()
                     .into(holder.imageView);
+            final String idpos = id.get(position);
 
-            if (favourite.get(position).equals("YES")) {
+            if (handler.CheckIsFAv(idpos)) {
                 holder.btnfav.setLiked(true);
             } else
                 holder.btnfav.setLiked(false);
             holder.btnfav.setOnLikeListener(new OnLikeListener() {
                 @Override
                 public void liked(LikeButton likeButton) {
-                    DatabaseHandler handler = new DatabaseHandler(mContext);
-                    handler.favUpdate("YES", id.get(holder.getAdapterPosition()));
-                    favourite.set(holder.getAdapterPosition(), "YES");
+                    handler.deleteFav(idpos);
+                    holder.btnfav.setLiked(true);
                 }
 
                 @Override
                 public void unLiked(LikeButton likeButton) {
-                    DatabaseHandler handler = new DatabaseHandler(mContext);
-                    handler.favUpdate("NO", id.get(holder.getAdapterPosition()));
-                    favourite.set(holder.getAdapterPosition(), "NO");
+                    handler.deleteFav(idpos);
+                    holder.btnfav.setLiked(false);
                 }
             });
             holder.mCardView.setOnClickListener(new View.OnClickListener() {

@@ -70,18 +70,15 @@ public class FavouriteFragment extends Fragment {
     }
 
     public void PopulateList() {
-        ArrayList<Movies> moviesArrayList = handler.getAllMovies();
-        for (int i = 0; i < moviesArrayList.size(); i++){
+        ArrayList<Movies> moviesArrayList = handler.getAllFavs();
+        for (int i = 0; i < moviesArrayList.size(); i++) {
             Movies movies = moviesArrayList.get(i);
-            if(movies.getFavourite().equals("YES")) {
-                id.add(movies.getId());
-                title.add(movies.getTitle());
-                moviesposter.add(movies.getImage());
-                vote.add(movies.getVote());
-                date.add(movies.getDate());
-                overview.add(movies.getOverview());
-                favourite.add(movies.getFavourite());
-            }
+            id.add(movies.getId());
+            title.add(movies.getTitle());
+            moviesposter.add(movies.getImage());
+            vote.add(movies.getVote());
+            date.add(movies.getDate());
+            overview.add(movies.getOverview());
         }
         mfavouriteAdapter.notifyDataSetChanged();
     }

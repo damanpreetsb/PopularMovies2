@@ -95,7 +95,7 @@ public class MoviesFragment extends Fragment {
         GridLayoutManager llm = new GridLayoutManager(getActivity(), 2);
         mRecyclerView.setLayoutManager(llm);
 
-        mMoviesAdapter = new MoviesAdapter(getActivity(), id, moviesposter, overview, date, title, vote, favourite);
+        mMoviesAdapter = new MoviesAdapter(getActivity(), id, moviesposter, overview, date, title, vote);
         mRecyclerView.setAdapter(mMoviesAdapter);
         Data();
 
@@ -125,7 +125,6 @@ public class MoviesFragment extends Fragment {
                 vote.add(movies.getVote());
                 date.add(movies.getDate());
                 overview.add(movies.getOverview());
-                favourite.add(movies.getFavourite());
         }
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         final String order = prefs.getString(getString(R.string.pref_order_key),
@@ -161,6 +160,7 @@ public class MoviesFragment extends Fragment {
                         @Override
                         public void onResponse(String response) {
                             try {
+                                handler.dropTable();
                                 JSONObject object = new JSONObject(response);
                                 String syncresponse = object.getString("results");
                                 JSONArray a1obj = new JSONArray(syncresponse);
@@ -174,7 +174,6 @@ public class MoviesFragment extends Fragment {
                                     movies.setVote(obj.getString("vote_average"));
                                     movies.setDate(obj.getString("release_date"));
                                     movies.setOverview(obj.getString("overview"));
-                                    movies.setFavourite("NO");
                                     handler.addMovies(movies);
                                 }
                             } catch (JSONException e) {
