@@ -124,7 +124,19 @@ public class MoviesFragment extends Fragment {
                 vote.add(movies.getVote());
                 date.add(movies.getDate());
                 overview.add(movies.getOverview());
-        }mMoviesAdapter.notifyDataSetChanged();
+        }
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        final String order = prefs.getString(getString(R.string.pref_order_key),
+                getString(R.string.pref_order_asc));
+        if (order.equals("asc")) {
+            Collections.reverse(moviesposter);
+            Collections.reverse(overview);
+            Collections.reverse(title);
+            Collections.reverse(vote);
+            Collections.reverse(date);
+            Collections.reverse(id);
+        }
+        mMoviesAdapter.notifyDataSetChanged();
     }
 
     public void Data() {
@@ -165,14 +177,6 @@ public class MoviesFragment extends Fragment {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            if (order.equals("asc")) {
-                                Collections.reverse(moviesposter);
-                                Collections.reverse(overview);
-                                Collections.reverse(title);
-                                Collections.reverse(vote);
-                                Collections.reverse(date);
-                                Collections.reverse(id);
-                            }
                             PopulateList();
                         }
                     }, new Response.ErrorListener() {
@@ -185,7 +189,7 @@ public class MoviesFragment extends Fragment {
             }) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
-                    HashMap<String, String> headers = new HashMap<String, String>();
+                    HashMap<String, String> headers = new HashMap<>();
                     headers.put("Content-Type", "application/json");
                     return headers;
                 }
