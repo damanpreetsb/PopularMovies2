@@ -20,9 +20,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_ID = "id";
     private static final String KEY_TITLE = "title";
     private static final String KEY_IMAGE = "image";
-    public static final String KEY_VOTE = "vote";
-    public static final String KEY_DATE = "date";
-    public static final String KEY_OVERVIEW = "overview";
+    private static final String KEY_VOTE = "vote";
+    private static final String KEY_DATE = "date";
+    private static final String KEY_OVERVIEW = "overview";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -50,6 +50,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public void dropTable(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MOVIES);
+        onCreate(db);
+    }
+
     public void addMovies(Movies movies){
         SQLiteDatabase db = this.getWritableDatabase();
         try {
@@ -74,7 +80,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Movies> movieslist = null;
         try{
-            movieslist = new ArrayList<Movies>();
+            movieslist = new ArrayList<>();
             String QUERY = "SELECT * FROM "+TABLE_MOVIES;
             Cursor cursor = db.rawQuery(QUERY, null);
             if(!cursor.isLast())

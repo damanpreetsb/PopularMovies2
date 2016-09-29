@@ -102,6 +102,12 @@ public class MoviesFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        Data();
+    }
+
     public void PopulateList(){
         id.clear();
         title.clear();
@@ -140,6 +146,7 @@ public class MoviesFragment extends Fragment {
                         @Override
                         public void onResponse(String response) {
                             try {
+                                handler.dropTable();
                                 JSONObject object = new JSONObject(response);
                                 String syncresponse = object.getString("results");
                                 JSONArray a1obj = new JSONArray(syncresponse);
