@@ -2,7 +2,7 @@ package com.singh.daman.popularmovies2.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -63,7 +63,7 @@ public class FavouriteFragment extends Fragment {
         handler = new DatabaseHandler(getContext());
         mfavouriteAdapter = new FavouriteAdapter(getActivity(), id, moviesposter, overview, date, title, vote, favourite);
         mRecyclerView.setAdapter(mfavouriteAdapter);
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        GridLayoutManager llm = new GridLayoutManager(getActivity(), 2);
         mRecyclerView.setLayoutManager(llm);
         PopulateList();
         return rootView;
@@ -73,13 +73,15 @@ public class FavouriteFragment extends Fragment {
         ArrayList<Movies> moviesArrayList = handler.getAllMovies();
         for (int i = 0; i < moviesArrayList.size(); i++){
             Movies movies = moviesArrayList.get(i);
-            id.add(movies.getId());
-            title.add(movies.getTitle());
-            moviesposter.add(movies.getImage());
-            vote.add(movies.getVote());
-            date.add(movies.getDate());
-            overview.add(movies.getOverview());
-            favourite.add(movies.getFavourite());
+            if(movies.getFavourite().equals("YES")) {
+                id.add(movies.getId());
+                title.add(movies.getTitle());
+                moviesposter.add(movies.getImage());
+                vote.add(movies.getVote());
+                date.add(movies.getDate());
+                overview.add(movies.getOverview());
+                favourite.add(movies.getFavourite());
+            }
         }
         mfavouriteAdapter.notifyDataSetChanged();
     }

@@ -1,5 +1,6 @@
 package com.singh.daman.popularmovies2.Fragment;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -22,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.singh.daman.popularmovies2.Activity.FavouriteActivity;
 import com.singh.daman.popularmovies2.Adapter.MoviesAdapter;
 import com.singh.daman.popularmovies2.Database.DatabaseHandler;
 import com.singh.daman.popularmovies2.Model.Movies;
@@ -72,6 +74,10 @@ public class MoviesFragment extends Fragment {
         if (id == R.id.action_refresh) {
             Data();
             return true;
+        }
+        if(id == R.id.action_fav){
+            Intent intent = new Intent(getActivity(), FavouriteActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -155,7 +161,6 @@ public class MoviesFragment extends Fragment {
                         @Override
                         public void onResponse(String response) {
                             try {
-                                handler.dropTable();
                                 JSONObject object = new JSONObject(response);
                                 String syncresponse = object.getString("results");
                                 JSONArray a1obj = new JSONArray(syncresponse);
