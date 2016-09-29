@@ -25,6 +25,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_VOTE = "vote";
     private static final String KEY_DATE = "date";
     private static final String KEY_OVERVIEW = "overview";
+    private static final String KEY_FAV = "favourite";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -39,7 +40,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_IMAGE + " TEXT,"
                 + KEY_VOTE + " TEXT,"
                 + KEY_DATE + " TEXT,"
-                + KEY_OVERVIEW + " TEXT" + ")";
+                + KEY_OVERVIEW + " TEXT,"
+                + KEY_FAV + " TEXT" + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
 
@@ -58,6 +60,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public void favUpdate(String value, String id ){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues newValues = new ContentValues();
+        newValues.put(KEY_FAV, value);
+
+        db.update( TABLE_MOVIES, newValues, "id="+id, null);
+    }
+
+
     public void addMovies(Movies movies){
         SQLiteDatabase db = this.getWritableDatabase();
         try {
@@ -68,6 +79,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             values.put(KEY_VOTE, movies.getVote());
             values.put(KEY_DATE, movies.getDate());
             values.put(KEY_OVERVIEW, movies.getOverview());
+            values.put(KEY_FAV, movies.getFavourite());
 
             // Inserting Row
             db.insert(TABLE_MOVIES, null, values);
@@ -96,6 +108,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     movies.setVote(cursor.getString(3));
                     movies.setDate(cursor.getString(4));
                     movies.setOverview(cursor.getString(5));
+                    movies.setFavourite(cursor.getString(6));
                     movieslist.add(movies);
                 }
             }

@@ -11,17 +11,27 @@ public class Movies {
     private String vote;
     private String date;
     private String overview;
+    private String favourite;
 
-    public Movies(){
-    }
-
-    public Movies(String id, String title, String image, String vote, String date, String overview) {
+    public Movies(String id, String title, String image, String vote, String date, String overview, String favourite) {
         this.id = id;
         this.title = title;
         this.image = image;
         this.vote = vote;
         this.date = date;
         this.overview = overview;
+        this.favourite = favourite;
+    }
+
+    public Movies(){
+    }
+
+    public String getFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(String favourite) {
+        this.favourite = favourite;
     }
 
     public String getId() {
