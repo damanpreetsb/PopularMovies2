@@ -2,6 +2,7 @@ package com.singh.daman.popularmovies2.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 public class FavouriteFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private FavouriteAdapter mfavouriteAdapter;
+    private boolean mTwoPane;
     private DatabaseHandler handler;
     ArrayList<String> moviesposter = new ArrayList<String>();
     ArrayList<String> overview = new ArrayList<String>();
@@ -57,11 +59,13 @@ public class FavouriteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        mTwoPane = getArguments().getBoolean("ISTAB");
+        FragmentManager fm = getActivity().getSupportFragmentManager();
         View rootView = inflater.inflate(R.layout.fragment_favourite, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.favrecyclerview);
         mRecyclerView.setHasFixedSize(true);
         handler = new DatabaseHandler(getContext());
-        mfavouriteAdapter = new FavouriteAdapter(getActivity(), id, moviesposter, overview, date, title, vote, favourite);
+        mfavouriteAdapter = new FavouriteAdapter(getActivity(), id, moviesposter, overview, date, title, vote, favourite, mTwoPane, fm);
         mRecyclerView.setAdapter(mfavouriteAdapter);
         GridLayoutManager llm = new GridLayoutManager(getActivity(), 2);
         mRecyclerView.setLayoutManager(llm);
