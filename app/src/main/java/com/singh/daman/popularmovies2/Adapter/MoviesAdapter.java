@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.like.IconType;
 import com.like.LikeButton;
@@ -38,10 +39,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
          ImageView imageView;
          LikeButton btnfav;
          CardView mCardView;
+         TextView movietitle;
 
          MyViewHolder(View v) {
             super(v);
             mCardView = (CardView) v.findViewById(R.id.card_view);
+             movietitle = (TextView) v.findViewById(R.id.movie_title);
             imageView = (ImageView) v.findViewById(R.id.grid_image);
             btnfav = (LikeButton) v.findViewById(R.id.fav_button);
             btnfav.setIcon(IconType.Star);
@@ -82,6 +85,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
                     .placeholder(R.drawable.loading).fit()
                     .into(holder.imageView);
             final String idpos = id.get(position);
+            holder.movietitle.setText(title.get(position));
 
             if (handler.CheckIsFAv(idpos)) {
                 holder.btnfav.setLiked(true);
