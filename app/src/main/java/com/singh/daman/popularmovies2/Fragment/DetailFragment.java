@@ -58,6 +58,7 @@ public class DetailFragment extends Fragment {
     ExpandableHeightListView reviewlist;
     TrailerAdapter adapter;
     ReviewsAdapter reviewsAdapter;
+    Bundle extras;
 
     public DetailFragment() {
         setHasOptionsMenu(true);
@@ -68,9 +69,6 @@ public class DetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle arguments = getArguments();
 
-        if (arguments != null) {
-            mUri = arguments.getParcelable(DetailFragment.DETAIL_URI);
-        }
     }
 
 
@@ -79,6 +77,18 @@ public class DetailFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+        Bundle arguments = getArguments();
+        Intent intent = getActivity().getIntent();
+
+        if(arguments != null || intent != null && intent.hasExtra("movies_details")){
+
+            if (arguments != null) {
+                extras = getArguments();
+            }else{
+                extras = getActivity().getIntent().getExtras();
+            }
+
+        }
         listView = (ExpandableHeightListView) rootView.findViewById(R.id.trailerlist);
         adapter = new TrailerAdapter(getContext(), key);
         listView.setAdapter(adapter);
@@ -88,8 +98,6 @@ public class DetailFragment extends Fragment {
         reviewsAdapter = new ReviewsAdapter(getContext(), reviewtext, reviewauthor);
         reviewlist.setAdapter(reviewsAdapter);
         reviewlist.setExpanded(true);
-
-        Bundle extras = getActivity().getIntent().getExtras();
 
         String image = extras.getString("EXTRA_IMAGE");
         String overview = extras.getString("EXTRA_OVERVIEW");

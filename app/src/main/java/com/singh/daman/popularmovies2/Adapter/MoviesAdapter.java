@@ -3,6 +3,7 @@ package com.singh.daman.popularmovies2.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.like.LikeButton;
 import com.like.OnLikeListener;
 import com.singh.daman.popularmovies2.Activity.DetailActivity;
 import com.singh.daman.popularmovies2.Database.DatabaseHandler;
+import com.singh.daman.popularmovies2.Fragment.DetailFragment;
 import com.singh.daman.popularmovies2.R;
 import com.squareup.picasso.Picasso;
 
@@ -28,6 +30,8 @@ import static com.singh.daman.popularmovies2.R.layout.movie;
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHolder> {
     private Context mContext;
     private ArrayList<String> id, moviesposter, overview, date, title, vote;
+    private boolean mTwoPane;
+    private FragmentManager fm;
 
      class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -46,7 +50,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
 
     public MoviesAdapter(Context c, ArrayList<String> id,
                          ArrayList<String> moviesposter, ArrayList<String> overview,
-                         ArrayList<String> date, ArrayList<String> title, ArrayList<String> vote) {
+                         ArrayList<String> date, ArrayList<String> title, ArrayList<String> vote,
+                         boolean mTwoPane, FragmentManager fm) {
         mContext = c;
         this.id = id;
         this.moviesposter = moviesposter;
@@ -54,6 +59,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
         this.date = date;
         this.title = title;
         this.vote = vote;
+        this.mTwoPane = mTwoPane;
+        this.fm = fm;
     }
 
     @Override
@@ -99,7 +106,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
             holder.mCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mContext, DetailActivity.class);
                     Bundle extras = new Bundle();
                     extras.putString("EXTRA_IMAGE", moviesposter.get(holder.getAdapterPosition()));
                     extras.putString("EXTRA_OVERVIEW", overview.get(holder.getAdapterPosition()));
@@ -107,8 +113,16 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
                     extras.putString("EXTRA_TITLE", title.get(holder.getAdapterPosition()));
                     extras.putString("EXTRA_VOTE", vote.get(holder.getAdapterPosition()));
                     extras.putString("EXTRA_ID", id.get(holder.getAdapterPosition()));
-                    intent.putExtras(extras);
-                    mContext.startActivity(intent);
+
+                    if (mTwoPane) {
+                        DetailFragment fragment = new DetailFragment();
+                        fragment.setArguments(extras);
+                        fm.beginTransaction().replace(R.id.movies_detail_container, fragment).commit();
+                    } else {
+                        Intent intent = new Intent(mContext, DetailActivity.class);
+                        intent.putExtras(extras);
+                        mContext.startActivity(intent);
+                    }
                 }
             });
 

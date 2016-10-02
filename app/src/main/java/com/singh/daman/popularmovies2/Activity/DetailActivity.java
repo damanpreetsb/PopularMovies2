@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.singh.daman.popularmovies2.Fragment.DetailFragment;
 import com.singh.daman.popularmovies2.R;
 
 public class DetailActivity extends AppCompatActivity {
@@ -15,14 +14,6 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
-        if(savedInstanceState==null)
-        {   Bundle arguments = new Bundle();
-            arguments.putParcelable(DetailFragment.DETAIL_URI, getIntent().getData());
-            DetailFragment fragment = new DetailFragment();
-            fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction().add(R.id.containerdetail,fragment).commit();
-        }
     }
 
 

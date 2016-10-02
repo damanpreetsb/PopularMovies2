@@ -2,10 +2,10 @@ package com.singh.daman.popularmovies2.Fragment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -45,6 +45,7 @@ import java.util.Map;
 public class MoviesFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private MoviesAdapter mMoviesAdapter;
+    private boolean mTwoPane;
     ArrayList<String> moviesposter = new ArrayList<String>();
     ArrayList<String> overview = new ArrayList<String>();
     ArrayList<String> date = new ArrayList<String>();
@@ -55,10 +56,6 @@ public class MoviesFragment extends Fragment {
     private DatabaseHandler handler;
 
     public MoviesFragment() {
-    }
-
-    public interface Callback {
-        void onItemSelected(Uri dateUri);
     }
 
     @Override
@@ -90,6 +87,8 @@ public class MoviesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        mTwoPane = getArguments().getBoolean("ISTAB");
+        FragmentManager fm = getActivity().getSupportFragmentManager();
         handler = new DatabaseHandler(getContext());
 
         View rootView = inflater.inflate(R.layout.fragment_movies, container, false);
@@ -99,7 +98,7 @@ public class MoviesFragment extends Fragment {
         GridLayoutManager llm = new GridLayoutManager(getActivity(), 2);
         mRecyclerView.setLayoutManager(llm);
 
-        mMoviesAdapter = new MoviesAdapter(getActivity(), id, moviesposter, overview, date, title, vote);
+        mMoviesAdapter = new MoviesAdapter(getActivity(), id, moviesposter, overview, date, title, vote, mTwoPane, fm);
         mRecyclerView.setAdapter(mMoviesAdapter);
         Data();
 

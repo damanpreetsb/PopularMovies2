@@ -48,6 +48,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_MOVIES_TABLE);
         db.execSQL(CREATE_FAV_TABLE);
+        db.close();
     }
 
     // Upgrading database
@@ -58,12 +59,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVS);
         // Create tables again
         onCreate(db);
+        db.close();
     }
 
     public void dropTable(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MOVIES);
         onCreate(db);
+        db.close();
     }
 
     public void addFavs(String id, String title, String image, String vote, String date, String overview){
@@ -161,6 +164,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void deleteFav(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
         db.execSQL("delete from "+TABLE_FAVS+" where "+KEY_ID+"='"+id+"'");
+        db.close();
     }
 
 
@@ -173,6 +177,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             return false;
         }
         cursor.close();
+        sqldb.close();
         return true;
     }
 }

@@ -1,30 +1,31 @@
 package com.singh.daman.popularmovies2.Activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.singh.daman.popularmovies2.Fragment.DetailFragment;
 import com.singh.daman.popularmovies2.Fragment.MoviesFragment;
 import com.singh.daman.popularmovies2.R;
 
-public class MainActivity extends AppCompatActivity implements MoviesFragment.Callback {
+public class MainActivity extends AppCompatActivity{
 
     private boolean mTwoPane;
-    private static final String DETAILFRAGMENT_TAG = "DFTAG";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (findViewById(R.id.movies_detail_container) != null) {
             mTwoPane = true;
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("ISTAB", mTwoPane);
             if (savedInstanceState == null) {
+                MoviesFragment moviesFragment = new MoviesFragment();
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, new MoviesFragment(), DETAILFRAGMENT_TAG)
+                        .replace(R.id.container, moviesFragment)
                         .commit();
+                moviesFragment.setArguments(bundle);
             }
         } else {
             mTwoPane = false;
@@ -49,17 +50,17 @@ public class MainActivity extends AppCompatActivity implements MoviesFragment.Ca
         return super.onOptionsItemSelected(item);
     }
 
-    public void onItemSelected(Uri contentUri) {
-
-        if (mTwoPane) {
-            Bundle args = new Bundle();
-            args.putParcelable(DetailFragment.DETAIL_URI, contentUri);
-            DetailFragment fragment = new DetailFragment();
-            fragment.setArguments(args);
-            getSupportFragmentManager().beginTransaction().replace(R.id.movies_detail_container, fragment, DETAILFRAGMENT_TAG).commit();
-        } else {
-            Intent intent = new Intent(this, DetailActivity.class).setData(contentUri);
-            startActivity(intent);
-        }
-    }
+//    public void onItemSelected(Uri contentUri) {
+//
+//        if (mTwoPane) {
+//            Bundle args = new Bundle();
+//            args.putParcelable(DetailFragment.DETAIL_URI, contentUri);
+//            DetailFragment fragment = new DetailFragment();
+//            fragment.setArguments(args);
+//            getSupportFragmentManager().beginTransaction().replace(R.id.movies_detail_container, fragment, DETAILFRAGMENT_TAG).commit();
+//        } else {
+//            Intent intent = new Intent(this, DetailActivity.class).setData(contentUri);
+//            startActivity(intent);
+//        }
+//    }
 }
