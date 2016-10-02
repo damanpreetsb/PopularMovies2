@@ -48,6 +48,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
             imageView = (ImageView) v.findViewById(R.id.grid_image);
             btnfav = (LikeButton) v.findViewById(R.id.fav_button);
             btnfav.setIcon(IconType.Star);
+             btnfav.setLikeDrawableRes(R.drawable.star_like);
+             btnfav.setUnlikeDrawableRes(R.drawable.star_unlike);
+             btnfav.setExplodingDotColorsRes(R.color.colorPrimary,R.color.colorPrimaryDark);
+             btnfav.setAnimationScaleFactor(2);
+             btnfav.setIconSizeDp(25);
         }
     }
 

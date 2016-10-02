@@ -23,7 +23,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="#8E24AA"
+        android:background="#9C27B0"
         android:orientation="horizontal"
         android:layout_height="wrap_content">
 
@@ -42,22 +42,13 @@
             android:textSize="16sp"
             android:textColor="@android:color/white"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            app:targetApi="jelly_bean" />
 
         <com.like.LikeButton
             android:id="@+id/fav_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:anim_scale_factor="2"
-            app:circle_end_color="@color/colorAccent"
-            app:circle_start_color="@color/colorPrimary"
-            app:dots_primary_color="@color/colorAccent"
-            app:dots_secondary_color="@color/colorPrimary"
-            app:icon_type="like"
-            app:is_enabled="false"
-            app:like_drawable="@drawable/thumb_on"
-            app:liked="true"
-            app:unlike_drawable="@drawable/thumb_off"
             android:layout_weight="1"
             android:layout_gravity="center" />
     </LinearLayout>
