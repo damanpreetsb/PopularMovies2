@@ -21,17 +21,17 @@ public class FavouriteActivity extends AppCompatActivity {
 
         if (findViewById(R.id.fav_movies_detail_container) != null) {
             mTwoPane = true;
-            Bundle bundle = new Bundle();
-            bundle.putBoolean("ISTAB", mTwoPane);
-            if (savedInstanceState == null) {
-                FavouriteFragment favFragment = new FavouriteFragment();
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.containerfav, favFragment)
-                        .commit();
-                favFragment.setArguments(bundle);
-            }
         } else {
             mTwoPane = false;
+        }
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("ISTAB", mTwoPane);
+        if (savedInstanceState == null) {
+            FavouriteFragment favFragment = new FavouriteFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.containerfav, favFragment)
+                    .commit();
+            favFragment.setArguments(bundle);
         }
     }
 }
