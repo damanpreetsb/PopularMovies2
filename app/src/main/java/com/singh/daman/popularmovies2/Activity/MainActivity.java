@@ -18,17 +18,17 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         if (findViewById(R.id.movies_detail_container) != null) {
             mTwoPane = true;
-            Bundle bundle = new Bundle();
-            bundle.putBoolean("ISTAB", mTwoPane);
-            if (savedInstanceState == null) {
-                MoviesFragment moviesFragment = new MoviesFragment();
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, moviesFragment)
-                        .commit();
-                moviesFragment.setArguments(bundle);
-            }
         } else {
             mTwoPane = false;
+        }
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("ISTAB", mTwoPane);
+        if (savedInstanceState == null) {
+            MoviesFragment moviesFragment = new MoviesFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, moviesFragment)
+                    .commit();
+            moviesFragment.setArguments(bundle);
         }
     }
 
@@ -49,4 +49,18 @@ public class MainActivity extends AppCompatActivity{
 
         return super.onOptionsItemSelected(item);
     }
+
+//    public void onItemSelected(Uri contentUri) {
+//
+//        if (mTwoPane) {
+//            Bundle args = new Bundle();
+//            args.putParcelable(DetailFragment.DETAIL_URI, contentUri);
+//            DetailFragment fragment = new DetailFragment();
+//            fragment.setArguments(args);
+//            getSupportFragmentManager().beginTransaction().replace(R.id.movies_detail_container, fragment, DETAILFRAGMENT_TAG).commit();
+//        } else {
+//            Intent intent = new Intent(this, DetailActivity.class).setData(contentUri);
+//            startActivity(intent);
+//        }
+//    }
 }

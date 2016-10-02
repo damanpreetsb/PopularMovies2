@@ -48,7 +48,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_MOVIES_TABLE);
         db.execSQL(CREATE_FAV_TABLE);
-        db.close();
     }
 
     // Upgrading database
@@ -59,7 +58,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVS);
         // Create tables again
         onCreate(db);
-        db.close();
     }
 
     public void dropTable(){

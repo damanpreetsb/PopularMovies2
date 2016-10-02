@@ -67,8 +67,6 @@ public class DetailFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle arguments = getArguments();
-
     }
 
 
@@ -78,16 +76,8 @@ public class DetailFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
         Bundle arguments = getArguments();
-        Intent intent = getActivity().getIntent();
-
-        if(arguments != null || intent != null && intent.hasExtra("movies_details")){
-
-            if (arguments != null) {
-                extras = getArguments();
-            }else{
-                extras = getActivity().getIntent().getExtras();
-            }
-
+        if(arguments != null){
+            extras = getArguments();
         }
         listView = (ExpandableHeightListView) rootView.findViewById(R.id.trailerlist);
         adapter = new TrailerAdapter(getContext(), key);
@@ -107,16 +97,6 @@ public class DetailFragment extends Fragment {
         String id = extras.getString("EXTRA_ID");
         Trailer(id);
         Review(id);
-
-
-//        String image = ",n,mn,n,knnjb";
-//        String overview = "hgfhfv";
-//        String date = "2016-01-16";
-//        title = "jhfgkj";
-//        String vote = "4/10";
-//        String id = "18";
-//        Trailer(id);
-//        Review(id);
 
 
         if (date.length() != 0 || overview.length() != 0) {
@@ -161,7 +141,6 @@ public class DetailFragment extends Fragment {
 
         if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(createShareForecastIntent());
-        } else {
         }
     }
 
@@ -246,7 +225,7 @@ public class DetailFragment extends Fragment {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            adapter.notifyDataSetChanged();
+                            reviewsAdapter.notifyDataSetChanged();
                         }
                     }, new Response.ErrorListener() {
                 @Override

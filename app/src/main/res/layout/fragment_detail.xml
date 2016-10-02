@@ -14,7 +14,8 @@
         android:gravity="center"
         android:textColor="#fff"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:ignore="PrivateResource" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -87,7 +88,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"/>
-
 
         </LinearLayout>
     </ScrollView>
