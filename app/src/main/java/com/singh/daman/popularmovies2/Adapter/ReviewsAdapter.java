@@ -56,7 +56,8 @@ public class ReviewsAdapter extends BaseAdapter {
 
         TextView title = (TextView) convertView.findViewById(R.id.review_author);
         TextView content = (TextView) convertView.findViewById(R.id.review_content);
-        title.setText(reviewauthor.get(position));
+        String author = reviewauthor.get(position)+" said: ";
+        title.setText(author);
         content.setText(reviewlist.get(position));
 
         return convertView;
