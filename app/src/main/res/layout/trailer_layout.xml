@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:clickable="true"
+    card_view:cardBackgroundColor="#f7f0f0"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardUseCompatPadding="true">
 
-    <TextView
-        style="@style/FontTheme"
-        android:id="@+id/trailer_text"
-        android:padding="10dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
-</LinearLayout>
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_ondemand_video_black_24dp"/>
+
+        <TextView
+            android:id="@+id/trailer_text"
+            style="@style/FontTheme"
+            android:padding="10dp" />
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

@@ -5,24 +5,36 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:clickable="true"
+    card_view:cardBackgroundColor="#f7f0f0"
     card_view:cardCornerRadius="4dp"
-    card_view:cardUseCompatPadding="true"
-    card_view:cardBackgroundColor="@color/cardview_dark_background">
+    card_view:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
 
-        <TextView
-            android:id="@+id/review_author"
-            style="@style/FontTheme"
-            android:padding="10dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_person_add_black_24dp" />
+
+            <TextView
+                android:id="@+id/review_author"
+                style="@style/FontTheme"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/review_content"
-            style="@style/FontTheme"
-            android:padding="10dp" />
+            style="@style/FontTheme" />
 
     </LinearLayout>
 
