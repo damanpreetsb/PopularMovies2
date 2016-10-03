@@ -2,6 +2,7 @@ package com.singh.daman.popularmovies2.Activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.singh.daman.popularmovies2.Fragment.FavouriteFragment;
 import com.singh.daman.popularmovies2.R;
@@ -18,6 +19,8 @@ public class FavouriteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.app_name);
 
         if (findViewById(R.id.fav_movies_detail_container) != null) {
             mTwoPane = true;

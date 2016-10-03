@@ -1,95 +1,112 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    android:orientation="vertical"
     tools:context="com.singh.daman.popularmovies2.Activity.DetailActivity">
 
-    <TextView
-        android:id="@+id/detail_name"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/ripple_material_light"
-        android:gravity="center"
-        android:textColor="#fff"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        tools:ignore="PrivateResource" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_gravity="center"
+            android:clickable="true"
+            card_view:cardCornerRadius="2dp"
+            card_view:cardUseCompatPadding="true">
+
+
+            <TextView
+                android:id="@+id/detail_name"
+                android:layout_width="match_parent"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                tools:ignore="PrivateResource"
+                android:typeface="serif"
+                android:textSize="24sp"
+                android:textStyle="normal|bold"
+                android:textAllCaps="true"
+                android:fontFamily="sans-serif"
+                android:textAlignment="center"
+                android:layout_height="80dp" />
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="true"
+            card_view:cardCornerRadius="2dp"
+            card_view:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/detail_image"
-                    android:layout_width="200dp"
-                    android:layout_height="250dp"
-                    android:layout_margin="10dp"
-                    android:contentDescription="@string/poster"/>
+            <ImageView
+                android:id="@+id/detail_image"
+                android:layout_width="200dp"
+                android:layout_height="250dp"
+                android:layout_margin="10dp"
+                android:contentDescription="@string/poster" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/detail_year"
-                        style="@style/FontTheme"
-                        tools:text="@string/n_a"
-                        tools:textSize="24sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/detail_date"
-                        style="@style/FontTheme"
-                        tools:text="@string/n_a" />
+                <TextView
+                    android:id="@+id/detail_year"
+                    style="@style/FontTheme"
+                    tools:text="@string/n_a"
+                    tools:textSize="24sp" />
 
-                    <TextView
-                        android:id="@+id/detail_vote"
-                        style="@style/FontTheme"
-                        tools:text="@string/n_a" />
+                <TextView
+                    android:id="@+id/detail_date"
+                    style="@style/FontTheme"
+                    tools:text="@string/n_a" />
 
-                    <TextView
-                        android:id="@+id/detail_trailer"
-                        style="@style/FontTheme"
-                        tools:text="@string/watch_trailer"
-                        tools:textColor="#0000EE"
-                        android:text="Watch Trailer" />
+                <TextView
+                    android:id="@+id/detail_vote"
+                    style="@style/FontTheme"
+                    tools:text="@string/n_a" />
 
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/detail_trailer"
+                    style="@style/FontTheme"
+                    android:text="Watch Trailer"
+                    tools:text="@string/watch_trailer"
+                    tools:textColor="#0000EE" />
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/detail_info"
-                style="@style/FontTheme"
-                tools:text="@string/n_a"
-                tools:textSize="16sp" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
-            <com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView
-                android:id="@+id/trailerlist"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"/>
+    <TextView
+        android:id="@+id/detail_info"
+        style="@style/FontTheme"
+        tools:text="@string/n_a"
+        tools:textSize="16sp" />
 
-            <com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView
-                android:id="@+id/reviewlist"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"/>
+    <com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView
+        android:id="@+id/trailerlist"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp" />
 
-        </LinearLayout>
-    </ScrollView>
+    <com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView
+        android:id="@+id/reviewlist"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp" />
+    </LinearLayout>
 
-</LinearLayout>
+</ScrollView>
