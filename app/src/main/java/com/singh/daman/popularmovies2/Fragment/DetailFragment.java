@@ -110,9 +110,9 @@ public class DetailFragment extends Fragment {
 
         final String image = extras.getString("EXTRA_IMAGE");
         final String overview = extras.getString("EXTRA_OVERVIEW");
-        final String date = "Release date: "+extras.getString("EXTRA_DATE");
+        final String date = "Release date:\n"+extras.getString("EXTRA_DATE");
         title = extras.getString("EXTRA_TITLE");
-        final String vote = "Rating: "+extras.getString("EXTRA_VOTE") + "/10";
+        final String vote = "Rating:\n"+extras.getString("EXTRA_VOTE") + "/10";
         final String id = extras.getString("EXTRA_ID");
         Trailer(id);
         Review(id);
