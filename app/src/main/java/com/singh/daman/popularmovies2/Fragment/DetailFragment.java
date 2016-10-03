@@ -30,8 +30,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
+import com.like.IconType;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 import com.singh.daman.popularmovies2.Adapter.ReviewsAdapter;
 import com.singh.daman.popularmovies2.Adapter.TrailerAdapter;
+import com.singh.daman.popularmovies2.Database.DatabaseHandler;
 import com.singh.daman.popularmovies2.R;
 import com.squareup.picasso.Picasso;
 
@@ -49,9 +53,6 @@ import java.util.Map;
 
 public class DetailFragment extends Fragment {
 
-    public static final String DETAIL_URI = "URI";
-    private Uri mUri;
-    private static final int DETAIL_LOADER = 0;
     String title;
     ArrayList<String> key = new ArrayList<String>();
     ArrayList<String> reviewtext = new ArrayList<String>();
@@ -61,6 +62,7 @@ public class DetailFragment extends Fragment {
     TrailerAdapter adapter;
     ReviewsAdapter reviewsAdapter;
     Bundle extras;
+    LikeButton btnfav;
 
     public DetailFragment() {
         setHasOptionsMenu(true);
@@ -89,6 +91,13 @@ public class DetailFragment extends Fragment {
         if(arguments != null){
             extras = getArguments();
         }
+        btnfav = (LikeButton) rootView.findViewById(R.id.fav_button);
+        btnfav.setIcon(IconType.Star);
+        btnfav.setLikeDrawableRes(R.drawable.star_like_detail);
+        btnfav.setUnlikeDrawableRes(R.drawable.star_unlike_detail);
+        btnfav.setExplodingDotColorsRes(R.color.colorPrimary,R.color.colorPrimaryDark);
+        btnfav.setAnimationScaleFactor(2);
+        btnfav.setIconSizeDp(40);
         listView = (ExpandableHeightListView) rootView.findViewById(R.id.trailerlist);
         adapter = new TrailerAdapter(getContext(), key);
         listView.setAdapter(adapter);
@@ -99,12 +108,12 @@ public class DetailFragment extends Fragment {
         reviewlist.setAdapter(reviewsAdapter);
         reviewlist.setExpanded(true);
 
-        String image = extras.getString("EXTRA_IMAGE");
-        String overview = extras.getString("EXTRA_OVERVIEW");
-        String date = extras.getString("EXTRA_DATE");
+        final String image = extras.getString("EXTRA_IMAGE");
+        final String overview = extras.getString("EXTRA_OVERVIEW");
+        final String date = "Release date: "+extras.getString("EXTRA_DATE");
         title = extras.getString("EXTRA_TITLE");
-        String vote = extras.getString("EXTRA_VOTE") + "/10";
-        String id = extras.getString("EXTRA_ID");
+        final String vote = "Rating: "+extras.getString("EXTRA_VOTE") + "/10";
+        final String id = extras.getString("EXTRA_ID");
         Trailer(id);
         Review(id);
 
@@ -112,10 +121,6 @@ public class DetailFragment extends Fragment {
 
         if (date.length() != 0 || overview.length() != 0) {
 
-            String year = date.split("-")[0];
-
-            ((TextView) rootView.findViewById(R.id.detail_year))
-                    .setText(year);
             ((TextView) rootView.findViewById(R.id.detail_name))
                     .setText(title);
             ((TextView) rootView.findViewById(R.id.detail_date))
@@ -134,6 +139,27 @@ public class DetailFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String str = key.get(i);
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + str)));
+            }
+        });
+
+        final DatabaseHandler handler = new DatabaseHandler(getContext());
+        if (handler.CheckIsFAv(id)) {
+            btnfav.setLiked(true);
+        } else
+            btnfav.setLiked(false);
+        btnfav.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                handler.addFavs(id ,
+                        title, image,
+                        vote, date, overview);
+                btnfav.setLiked(true);
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                handler.deleteFav(id);
+                btnfav.setLiked(false);
             }
         });
 
