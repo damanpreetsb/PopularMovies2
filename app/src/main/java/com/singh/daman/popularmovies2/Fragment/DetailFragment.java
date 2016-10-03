@@ -56,7 +56,6 @@ public class DetailFragment extends Fragment {
     ArrayList<String> key = new ArrayList<String>();
     ArrayList<String> reviewtext = new ArrayList<String>();
     ArrayList<String> reviewauthor = new ArrayList<String>();
-    TextView trailer;
     ExpandableHeightListView listView;
     ExpandableHeightListView reviewlist;
     TrailerAdapter adapter;
@@ -129,7 +128,6 @@ public class DetailFragment extends Fragment {
         ImageView imageView = (ImageView) rootView.findViewById(R.id.detail_image);
         Picasso.with(getContext()).load(image).placeholder(R.drawable.loading).fit().into(imageView);
 
-        trailer = (TextView) rootView.findViewById(R.id.detail_trailer);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

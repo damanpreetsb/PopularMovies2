@@ -10,61 +10,50 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <android.support.v7.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:clickable="true"
-            card_view:cardCornerRadius="2dp"
-            card_view:cardUseCompatPadding="true">
+            android:orientation="horizontal">
 
-
-            <TextView
-                android:id="@+id/detail_name"
-                android:layout_width="match_parent"
-                android:background="@color/colorAccent"
-                android:gravity="center"
-                tools:ignore="PrivateResource"
-                android:typeface="serif"
-                android:textSize="24sp"
-                android:textStyle="normal|bold"
-                android:textAllCaps="true"
-                android:fontFamily="sans-serif"
-                android:textAlignment="center"
-                android:layout_height="80dp" />
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:clickable="true"
-            card_view:cardCornerRadius="2dp"
-            card_view:cardUseCompatPadding="true">
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_gravity="center"
+                android:clickable="true"
+                card_view:cardCornerRadius="4dp"
+                card_view:cardElevation="2dp"
+                card_view:cardUseCompatPadding="true">
 
-            <ImageView
-                android:id="@+id/detail_image"
-                android:layout_width="200dp"
-                android:layout_height="250dp"
-                android:layout_margin="10dp"
-                android:contentDescription="@string/poster" />
+                <ImageView
+                    android:id="@+id/detail_image"
+                    android:layout_width="200dp"
+                    android:layout_height="250dp"
+                    android:contentDescription="@string/poster" />
+
+            </android.support.v7.widget.CardView>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
+                android:gravity="start"
                 android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/detail_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="true"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    style="@style/FontTheme"/>
 
                 <TextView
                     android:id="@+id/detail_year"
                     style="@style/FontTheme"
+                    android:textSize="24sp"
+                    android:textStyle="normal|bold"
                     tools:text="@string/n_a"
                     tools:textSize="24sp" />
 
@@ -78,17 +67,9 @@
                     style="@style/FontTheme"
                     tools:text="@string/n_a" />
 
-                <TextView
-                    android:id="@+id/detail_trailer"
-                    style="@style/FontTheme"
-                    android:text="Watch Trailer"
-                    tools:text="@string/watch_trailer"
-                    tools:textColor="#0000EE" />
-
             </LinearLayout>
 
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </LinearLayout>
 
     <TextView
         android:id="@+id/detail_info"
@@ -107,6 +88,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="8dp" />
-    </LinearLayout>
+</LinearLayout>
 
-</ScrollView>
+    </ScrollView>

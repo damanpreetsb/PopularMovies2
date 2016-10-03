@@ -11,9 +11,9 @@
     <style name="FontTheme" parent="@android:style/TextAppearance">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">#000</item>
+        <item name="android:textColor">#383737</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:layout_margin">20sp</item>
+        <item name="android:layout_margin">5sp</item>
     </style>
 
 </resources>
