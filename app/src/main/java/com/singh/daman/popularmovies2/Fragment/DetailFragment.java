@@ -6,9 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ShareActionProvider;
-import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -61,7 +62,6 @@ public class DetailFragment extends Fragment {
     TrailerAdapter adapter;
     ReviewsAdapter reviewsAdapter;
     Bundle extras;
-    Toolbar toolbar;
 
     public DetailFragment() {
         setHasOptionsMenu(true);
@@ -76,7 +76,8 @@ public class DetailFragment extends Fragment {
     public void onResume() {
         super.onResume();
         AppCompatActivity activity = (AppCompatActivity) getActivity();
-        toolbar.setTitle(title);
+        ActionBar actionBar = activity.getSupportActionBar();
+        actionBar.setTitle(Html.fromHtml("<small>"+title+"</small>"));
     }
 
 
@@ -85,7 +86,6 @@ public class DetailFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-        toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         Bundle arguments = getArguments();
         if(arguments != null){
             extras = getArguments();
