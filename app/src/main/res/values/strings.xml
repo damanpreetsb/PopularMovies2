@@ -17,6 +17,7 @@
     <string name="pref_order_label_desc">Descending</string>
     <string name="n_a">N/A</string>
     <string name="watch_trailer">Watch Trailer</string>
+    <string name="share_trailer">Share Trailer</string>
     <string name="poster">Poster</string>
     <string name="reviews">Reviews</string>
     <string name="favourite">Favourite</string>
