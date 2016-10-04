@@ -29,11 +29,11 @@
             style="@style/FontTheme"
             android:padding="10dp" />
 
-        <ImageView
+        <Button
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_share_black_24dp"
-            android:contentDescription="@string/share_trailer"/>
+            android:id="@+id/trailer_share"
+            android:background="@drawable/ic_share_black_24dp"/>
 
 
     </LinearLayout>

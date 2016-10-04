@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.singh.daman.popularmovies2.R;
@@ -57,6 +58,7 @@ public class TrailerAdapter extends BaseAdapter {
             row = inflater.inflate(R.layout.trailer_layout, parent, false);
             viewHolder = new CardViewHolder();
             viewHolder.title = (TextView) row.findViewById(R.id.trailer_text);
+
             row.setTag(viewHolder);
         }else{
             viewHolder = (CardViewHolder)row.getTag();
@@ -65,18 +67,25 @@ public class TrailerAdapter extends BaseAdapter {
         String str = "Trailer " + (position+1);
         viewHolder.title.setText(str);
 
-//        CardView cardView = (CardView) convertView.findViewById(R.id.trailer_card);
-//        cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + key.get(position))));
-//            }
-//        });
+        final String url =  "http://www.youtube.com/watch?v=" + key.get(position);
 
         row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + key.get(position))));
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+            }
+        });
+
+        Button share  = (Button) row.findViewById(R.id.trailer_share);
+
+       share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent share = new Intent(android.content.Intent.ACTION_SEND);
+                share.setType("text/plain");
+                share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                share.putExtra(Intent.EXTRA_TEXT, url);
+                context.startActivity(Intent.createChooser(share, "Share link!"));
             }
         });
 
