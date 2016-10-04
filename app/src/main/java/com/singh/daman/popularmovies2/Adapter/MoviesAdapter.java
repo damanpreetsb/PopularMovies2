@@ -134,6 +134,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
                     }
                 }
             });
+            handler.close();
 
         } catch (Exception e) {
             e.printStackTrace();

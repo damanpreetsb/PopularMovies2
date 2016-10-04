@@ -20,5 +20,8 @@
     <string name="share_trailer">Share Trailer</string>
     <string name="poster">Poster</string>
     <string name="reviews">Reviews</string>
+    <string name="no_reviews">No Reviews</string>
     <string name="favourite">Favourite</string>
+    <string name="details">Details</string>
+    <string name="settings">Settings</string>
 </resources>

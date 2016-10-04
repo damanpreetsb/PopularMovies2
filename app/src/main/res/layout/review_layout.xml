@@ -32,6 +32,7 @@
                 style="@style/FontTheme"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:text="@string/no_reviews"
                 android:layout_margin="5dp" />
         </LinearLayout>
 

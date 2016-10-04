@@ -49,18 +49,4 @@ public class MainActivity extends AppCompatActivity{
 
         return super.onOptionsItemSelected(item);
     }
-
-//    public void onItemSelected(Uri contentUri) {
-//
-//        if (mTwoPane) {
-//            Bundle args = new Bundle();
-//            args.putParcelable(DetailFragment.DETAIL_URI, contentUri);
-//            DetailFragment fragment = new DetailFragment();
-//            fragment.setArguments(args);
-//            getSupportFragmentManager().beginTransaction().replace(R.id.movies_detail_container, fragment, DETAILFRAGMENT_TAG).commit();
-//        } else {
-//            Intent intent = new Intent(this, DetailActivity.class).setData(contentUri);
-//            startActivity(intent);
-//        }
-//    }
 }

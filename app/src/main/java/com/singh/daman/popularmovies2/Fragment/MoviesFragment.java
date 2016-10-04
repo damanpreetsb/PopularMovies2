@@ -157,7 +157,6 @@ public class MoviesFragment extends Fragment {
                     getString(R.string.pref_order_asc));
 
             String url = BASE_URL + sort + "?" + API_KEY_URL + API_KEY;
-            System.out.println("url: "+url);
             StringRequest stringRequest = new StringRequest(Request.Method.GET,
                     url,
                     new Response.Listener<String>() {

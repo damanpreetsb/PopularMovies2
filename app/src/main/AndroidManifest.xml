@@ -19,7 +19,7 @@
         </activity>
         <activity
             android:name=".Activity.DetailActivity"
-            android:label="Details"
+            android:label="@string/details"
             android:parentActivityName=".Activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -27,13 +27,19 @@
         </activity>
         <activity
             android:name=".Activity.SettingsActivity"
-            android:label="Settings"
+            android:label="@string/settings"
             android:parentActivityName=".Activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activity.MainActivity" />
         </activity>
-        <activity android:name=".Activity.FavouriteActivity"></activity>
+        <activity android:name=".Activity.FavouriteActivity"
+            android:label="@string/favourite"
+            android:parentActivityName=".Activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activity.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

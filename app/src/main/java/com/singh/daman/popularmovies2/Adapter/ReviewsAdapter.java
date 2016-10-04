@@ -32,7 +32,10 @@ public class ReviewsAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return reviewlist.size();
+        if (reviewlist.size() == 0) {
+            return 1;
+        } else
+            return reviewlist.size();
     }
 
     @Override
@@ -56,9 +59,15 @@ public class ReviewsAdapter extends BaseAdapter {
 
         TextView title = (TextView) convertView.findViewById(R.id.review_author);
         TextView content = (TextView) convertView.findViewById(R.id.review_content);
-        String author = reviewauthor.get(position)+" said: ";
-        title.setText(author);
-        content.setText(reviewlist.get(position));
+        if(reviewlist.size() != 0) {
+            content.setVisibility(View.VISIBLE);
+            String author = reviewauthor.get(position) + " said: ";
+            title.setText(author);
+            content.setText(reviewlist.get(position));
+        }
+        else {
+            content.setVisibility(View.GONE);
+        }
 
         return convertView;
     }

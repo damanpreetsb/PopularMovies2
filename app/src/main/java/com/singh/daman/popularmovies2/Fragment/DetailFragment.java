@@ -131,15 +131,6 @@ public class DetailFragment extends Fragment {
         ImageView imageView = (ImageView) rootView.findViewById(R.id.detail_image);
         Picasso.with(getContext()).load(image).placeholder(R.drawable.loading).fit().into(imageView);
 
-
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                String str = key.get(i);
-//                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + str)));
-//            }
-//        });
-
         final DatabaseHandler handler = new DatabaseHandler(getContext());
         if (handler.CheckIsFAv(id)) {
             btnfav.setLiked(true);

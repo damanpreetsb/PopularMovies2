@@ -29,6 +29,8 @@
             android:id="@+id/trailer_text"
             style="@style/FontTheme"
             android:padding="10dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
             android:layout_toEndOf="@+id/play_image"
             android:layout_toRightOf="@+id/play_image"/>
 
