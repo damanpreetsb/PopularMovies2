@@ -128,7 +128,8 @@ public class DetailFragment extends Fragment {
                     .setText(vote);
         }
         ImageView imageView = (ImageView) rootView.findViewById(R.id.detail_image);
-        Picasso.with(getContext()).load(image).placeholder(R.drawable.loading).fit().into(imageView);
+        Picasso.with(getContext()).load(image).placeholder(R.drawable.loading)
+                .error(R.drawable.error).fit().into(imageView);
 
         final DatabaseHandler handler = new DatabaseHandler(getContext());
         if (handler.CheckIsFAv(id)) {
