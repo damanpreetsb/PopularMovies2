@@ -59,13 +59,12 @@ public class ReviewsAdapter extends BaseAdapter {
 
         TextView title = (TextView) convertView.findViewById(R.id.review_author);
         TextView content = (TextView) convertView.findViewById(R.id.review_content);
-        if(reviewlist.size() != 0) {
+        if (reviewlist.size() != 0) {
             content.setVisibility(View.VISIBLE);
             String author = reviewauthor.get(position) + " said: ";
             title.setText(author);
             content.setText(reviewlist.get(position));
-        }
-        else {
+        } else {
             content.setVisibility(View.GONE);
         }
 

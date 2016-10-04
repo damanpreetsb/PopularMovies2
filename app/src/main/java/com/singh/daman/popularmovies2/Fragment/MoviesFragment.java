@@ -76,7 +76,7 @@ public class MoviesFragment extends Fragment {
             Data();
             return true;
         }
-        if(id == R.id.action_fav){
+        if (id == R.id.action_fav) {
             Intent intent = new Intent(getActivity(), FavouriteActivity.class);
             startActivity(intent);
         }
@@ -106,12 +106,12 @@ public class MoviesFragment extends Fragment {
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         Data();
     }
 
-    public void PopulateList(){
+    public void PopulateList() {
         id.clear();
         title.clear();
         moviesposter.clear();
@@ -120,14 +120,14 @@ public class MoviesFragment extends Fragment {
         overview.clear();
         favourite.clear();
         ArrayList<Movies> moviesArrayList = handler.getAllMovies();
-        for (int i = 0; i < moviesArrayList.size(); i++){
+        for (int i = 0; i < moviesArrayList.size(); i++) {
             Movies movies = moviesArrayList.get(i);
-                id.add(movies.getId());
-                title.add(movies.getTitle());
-                moviesposter.add(movies.getImage());
-                vote.add(movies.getVote());
-                date.add(movies.getDate());
-                overview.add(movies.getOverview());
+            id.add(movies.getId());
+            title.add(movies.getTitle());
+            moviesposter.add(movies.getImage());
+            vote.add(movies.getVote());
+            date.add(movies.getDate());
+            overview.add(movies.getOverview());
         }
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         final String order = prefs.getString(getString(R.string.pref_order_key),

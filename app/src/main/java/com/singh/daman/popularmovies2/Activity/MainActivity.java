@@ -9,9 +9,10 @@ import android.view.MenuItem;
 import com.singh.daman.popularmovies2.Fragment.MoviesFragment;
 import com.singh.daman.popularmovies2.R;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     private boolean mTwoPane;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

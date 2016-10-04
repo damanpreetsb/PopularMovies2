@@ -76,7 +76,7 @@ public class DetailFragment extends Fragment {
         super.onResume();
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         ActionBar actionBar = activity.getSupportActionBar();
-        actionBar.setTitle(Html.fromHtml("<small>"+title+"</small>"));
+        actionBar.setTitle(Html.fromHtml("<small>" + title + "</small>"));
     }
 
 
@@ -86,14 +86,14 @@ public class DetailFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
         Bundle arguments = getArguments();
-        if(arguments != null){
+        if (arguments != null) {
             extras = getArguments();
         }
         btnfav = (LikeButton) rootView.findViewById(R.id.fav_button);
         btnfav.setIcon(IconType.Star);
         btnfav.setLikeDrawableRes(R.drawable.star_like_detail);
         btnfav.setUnlikeDrawableRes(R.drawable.star_unlike_detail);
-        btnfav.setExplodingDotColorsRes(R.color.colorPrimary,R.color.colorPrimaryDark);
+        btnfav.setExplodingDotColorsRes(R.color.colorPrimary, R.color.colorPrimaryDark);
         btnfav.setAnimationScaleFactor(2);
         btnfav.setIconSizeDp(40);
         listView = (ExpandableHeightListView) rootView.findViewById(R.id.trailerlist);
@@ -108,13 +108,12 @@ public class DetailFragment extends Fragment {
 
         final String image = extras.getString("EXTRA_IMAGE");
         final String overview = extras.getString("EXTRA_OVERVIEW");
-        final String date = "Release date:\n"+extras.getString("EXTRA_DATE");
+        final String date = "Release date:\n" + extras.getString("EXTRA_DATE");
         title = extras.getString("EXTRA_TITLE");
-        final String vote = "Rating:\n"+extras.getString("EXTRA_VOTE") + "/10";
+        final String vote = "Rating:\n" + extras.getString("EXTRA_VOTE") + "/10";
         final String id = extras.getString("EXTRA_ID");
         Trailer(id);
         Review(id);
-
 
 
         if (date.length() != 0 || overview.length() != 0) {
@@ -139,7 +138,7 @@ public class DetailFragment extends Fragment {
         btnfav.setOnLikeListener(new OnLikeListener() {
             @Override
             public void liked(LikeButton likeButton) {
-                handler.addFavs(id ,
+                handler.addFavs(id,
                         title, image,
                         vote, date, overview);
                 btnfav.setLiked(true);
@@ -151,6 +150,7 @@ public class DetailFragment extends Fragment {
                 btnfav.setLiked(false);
             }
         });
+        handler.close();
 
         return rootView;
     }

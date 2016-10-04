@@ -53,21 +53,21 @@ public class TrailerAdapter extends BaseAdapter {
 
         View row = convertView;
         CardViewHolder viewHolder;
-        if (row == null){
+        if (row == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(R.layout.trailer_layout, parent, false);
             viewHolder = new CardViewHolder();
             viewHolder.title = (TextView) row.findViewById(R.id.trailer_text);
 
             row.setTag(viewHolder);
-        }else{
-            viewHolder = (CardViewHolder)row.getTag();
+        } else {
+            viewHolder = (CardViewHolder) row.getTag();
         }
 
-        String str = "Trailer " + (position+1);
+        String str = "Trailer " + (position + 1);
         viewHolder.title.setText(str);
 
-        final String url =  "http://www.youtube.com/watch?v=" + key.get(position);
+        final String url = "http://www.youtube.com/watch?v=" + key.get(position);
 
         row.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,9 +76,9 @@ public class TrailerAdapter extends BaseAdapter {
             }
         });
 
-        Button share  = (Button) row.findViewById(R.id.trailer_share);
+        Button share = (Button) row.findViewById(R.id.trailer_share);
 
-       share.setOnClickListener(new View.OnClickListener() {
+        share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent share = new Intent(android.content.Intent.ACTION_SEND);

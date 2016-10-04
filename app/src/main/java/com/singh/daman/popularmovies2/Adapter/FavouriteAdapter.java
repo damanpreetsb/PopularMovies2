@@ -49,16 +49,16 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.MyVi
             btnfav.setIcon(IconType.Star);
             btnfav.setLikeDrawableRes(R.drawable.star_like);
             btnfav.setUnlikeDrawableRes(R.drawable.star_unlike);
-            btnfav.setExplodingDotColorsRes(R.color.colorPrimary,R.color.colorPrimaryDark);
+            btnfav.setExplodingDotColorsRes(R.color.colorPrimary, R.color.colorPrimaryDark);
             btnfav.setAnimationScaleFactor(2);
             btnfav.setIconSizeDp(25);
         }
     }
 
     public FavouriteAdapter(Context c, ArrayList<String> id,
-                         ArrayList<String> moviesposter, ArrayList<String> overview,
-                         ArrayList<String> date, ArrayList<String> title, ArrayList<String> vote,
-                         ArrayList<String> favourite, boolean mTwoPane, FragmentManager fm) {
+                            ArrayList<String> moviesposter, ArrayList<String> overview,
+                            ArrayList<String> date, ArrayList<String> title, ArrayList<String> vote,
+                            ArrayList<String> favourite, boolean mTwoPane, FragmentManager fm) {
         mContext = c;
         this.id = id;
         this.moviesposter = moviesposter;

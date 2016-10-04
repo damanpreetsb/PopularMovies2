@@ -21,7 +21,7 @@ public class Movies {
         this.overview = overview;
     }
 
-    public Movies(){
+    public Movies() {
     }
 
 

@@ -60,14 +60,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void dropTable(){
+    public void dropTable() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MOVIES);
         onCreate(db);
         db.close();
     }
 
-    public void addFavs(String id, String title, String image, String vote, String date, String overview){
+    public void addFavs(String id, String title, String image, String vote, String date, String overview) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_ID, id);
@@ -82,7 +82,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
 
-    public void addMovies(Movies movies){
+    public void addMovies(Movies movies) {
         SQLiteDatabase db = this.getWritableDatabase();
         try {
             ContentValues values = new ContentValues();
@@ -96,7 +96,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             db.insert(TABLE_MOVIES, null, values);
             //2nd argument is String containing nullColumnHack
             db.close(); // Closing database connection
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -104,14 +104,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public ArrayList<Movies> getAllFavs() {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Movies> movieslist = null;
-        try{
+        try {
             movieslist = new ArrayList<>();
-            String QUERY = "SELECT * FROM "+TABLE_FAVS;
+            String QUERY = "SELECT * FROM " + TABLE_FAVS;
             Cursor cursor = db.rawQuery(QUERY, null);
-            if(!cursor.isLast())
-            {
-                while (cursor.moveToNext())
-                {
+            if (!cursor.isLast()) {
+                while (cursor.moveToNext()) {
                     Movies movies = new Movies();
                     movies.setId(cursor.getString(0));
                     movies.setTitle(cursor.getString(1));
@@ -124,8 +122,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             }
             cursor.close();
             db.close();
-        }catch (Exception e){
-            Log.e("error",e+"");
+        } catch (Exception e) {
+            Log.e("error", e + "");
         }
         return movieslist;
     }
@@ -133,14 +131,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public ArrayList<Movies> getAllMovies() {
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<Movies> movieslist = null;
-        try{
+        try {
             movieslist = new ArrayList<>();
-            String QUERY = "SELECT * FROM "+TABLE_MOVIES;
+            String QUERY = "SELECT * FROM " + TABLE_MOVIES;
             Cursor cursor = db.rawQuery(QUERY, null);
-            if(!cursor.isLast())
-            {
-                while (cursor.moveToNext())
-                {
+            if (!cursor.isLast()) {
+                while (cursor.moveToNext()) {
                     Movies movies = new Movies();
                     movies.setId(cursor.getString(0));
                     movies.setTitle(cursor.getString(1));
@@ -153,15 +149,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             }
             cursor.close();
             db.close();
-        }catch (Exception e){
-            Log.e("error",e+"");
+        } catch (Exception e) {
+            Log.e("error", e + "");
         }
         return movieslist;
     }
 
     public void deleteFav(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        db.execSQL("delete from "+TABLE_FAVS+" where "+KEY_ID+"='"+id+"'");
+        db.execSQL("delete from " + TABLE_FAVS + " where " + KEY_ID + "='" + id + "'");
         db.close();
     }
 
@@ -170,7 +166,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase sqldb = this.getReadableDatabase();
         String Query = "Select * from " + TABLE_FAVS + " where " + KEY_ID + " = " + fieldValue;
         Cursor cursor = sqldb.rawQuery(Query, null);
-        if(cursor.getCount() <= 0){
+        if (cursor.getCount() <= 0) {
             cursor.close();
             return false;
         }

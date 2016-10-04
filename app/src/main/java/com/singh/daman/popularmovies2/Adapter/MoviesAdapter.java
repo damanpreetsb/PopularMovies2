@@ -34,25 +34,25 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
     private boolean mTwoPane;
     private FragmentManager fm;
 
-     class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
-         ImageView imageView;
-         LikeButton btnfav;
-         CardView mCardView;
-         TextView movietitle;
+        ImageView imageView;
+        LikeButton btnfav;
+        CardView mCardView;
+        TextView movietitle;
 
-         MyViewHolder(View v) {
+        MyViewHolder(View v) {
             super(v);
             mCardView = (CardView) v.findViewById(R.id.card_view);
-             movietitle = (TextView) v.findViewById(R.id.movie_title);
+            movietitle = (TextView) v.findViewById(R.id.movie_title);
             imageView = (ImageView) v.findViewById(R.id.grid_image);
             btnfav = (LikeButton) v.findViewById(R.id.fav_button);
             btnfav.setIcon(IconType.Star);
-             btnfav.setLikeDrawableRes(R.drawable.star_like);
-             btnfav.setUnlikeDrawableRes(R.drawable.star_unlike);
-             btnfav.setExplodingDotColorsRes(R.color.colorPrimary,R.color.colorPrimaryDark);
-             btnfav.setAnimationScaleFactor(2);
-             btnfav.setIconSizeDp(25);
+            btnfav.setLikeDrawableRes(R.drawable.star_like);
+            btnfav.setUnlikeDrawableRes(R.drawable.star_unlike);
+            btnfav.setExplodingDotColorsRes(R.color.colorPrimary, R.color.colorPrimaryDark);
+            btnfav.setAnimationScaleFactor(2);
+            btnfav.setIconSizeDp(25);
         }
     }
 
@@ -100,7 +100,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
             holder.btnfav.setOnLikeListener(new OnLikeListener() {
                 @Override
                 public void liked(LikeButton likeButton) {
-                    handler.addFavs(idpos ,
+                    handler.addFavs(idpos,
                             title.get(holder.getAdapterPosition()), moviesposter.get(holder.getAdapterPosition()),
                             vote.get(holder.getAdapterPosition()), date.get(holder.getAdapterPosition()),
                             overview.get(holder.getAdapterPosition()));
