@@ -87,7 +87,8 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.MyVi
             final DatabaseHandler handler = new DatabaseHandler(mContext);
             Picasso.with(mContext)
                     .load(moviesposter.get(position))
-                    .placeholder(R.drawable.loading).fit()
+                    .placeholder(R.drawable.loading)
+                    .error(R.drawable.error).fit()
                     .into(holder.imageView);
             final String idpos = id.get(position);
             holder.movietitle.setText(title.get(position));
@@ -131,6 +132,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.MyVi
                     }
                 }
             });
+            handler.close();
 
         } catch (Exception e) {
             e.printStackTrace();
