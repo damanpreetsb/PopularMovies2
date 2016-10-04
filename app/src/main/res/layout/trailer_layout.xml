@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:clickable="true"
+    android:id="@+id/trailer_card"
     card_view:cardBackgroundColor="#f7f0f0"
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="2dp"
@@ -17,10 +18,11 @@
         android:orientation="horizontal"
         android:padding="10dp">
 
-        <Button
+        <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/ic_ondemand_video_black_24dp"/>
+            android:src="@drawable/ic_ondemand_video_black_24dp"
+            android:contentDescription="@string/watch_trailer"/>
 
         <TextView
             android:id="@+id/trailer_text"

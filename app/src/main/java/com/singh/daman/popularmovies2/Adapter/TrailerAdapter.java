@@ -2,6 +2,8 @@ package com.singh.daman.popularmovies2.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,10 @@ public class TrailerAdapter extends BaseAdapter {
         this.key = key;
     }
 
+    static class CardViewHolder {
+        TextView title;
+    }
+
     @Override
     public int getCount() {
         return key.size();
@@ -42,19 +48,39 @@ public class TrailerAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
-        if (inflater == null)
-            inflater = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if (convertView == null)
-            convertView = inflater.inflate(R.layout.trailer_layout, null);
+        View row = convertView;
+        CardViewHolder viewHolder;
+        if (row == null){
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            row = inflater.inflate(R.layout.trailer_layout, parent, false);
+            viewHolder = new CardViewHolder();
+            viewHolder.title = (TextView) row.findViewById(R.id.trailer_text);
+            row.setTag(viewHolder);
+        }else{
+            viewHolder = (CardViewHolder)row.getTag();
+        }
 
-        TextView title = (TextView) convertView.findViewById(R.id.trailer_text);
         String str = "Trailer " + (position+1);
-        title.setText(str);
+        viewHolder.title.setText(str);
 
-        return convertView;
+//        CardView cardView = (CardView) convertView.findViewById(R.id.trailer_card);
+//        cardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + key.get(position))));
+//            }
+//        });
+
+        row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + key.get(position))));
+            }
+        });
+
+        return row;
     }
 
 }
