@@ -4,6 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.singh.daman.popularmovies2.Activity.SettingsActivity">
+    tools:context="com.singh.daman.popularmovies2.activity.SettingsActivity">
 
 </LinearLayout>

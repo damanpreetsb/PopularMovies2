@@ -3,5 +3,5 @@
     android:id="@+id/containerfav"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.FavouriteActivity"
+    tools:context=".activity.FavouriteActivity"
     tools:ignore="MergeRootFrame" />

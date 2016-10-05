@@ -1,4 +1,4 @@
-package com.singh.daman.popularmovies2.Fragment;
+package com.singh.daman.popularmovies2.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,9 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.singh.daman.popularmovies2.Adapter.FavouriteAdapter;
-import com.singh.daman.popularmovies2.Database.DatabaseHandler;
-import com.singh.daman.popularmovies2.Model.Movies;
+import com.singh.daman.popularmovies2.adapter.FavouriteAdapter;
+import com.singh.daman.popularmovies2.database.DatabaseHandler;
+import com.singh.daman.popularmovies2.model.Movies;
 import com.singh.daman.popularmovies2.R;
 
 import java.util.ArrayList;
@@ -69,11 +69,11 @@ public class FavouriteFragment extends Fragment {
         mRecyclerView.setAdapter(mfavouriteAdapter);
         GridLayoutManager llm = new GridLayoutManager(getActivity(), 2);
         mRecyclerView.setLayoutManager(llm);
-        PopulateList();
+        populateList();
         return rootView;
     }
 
-    public void PopulateList() {
+    public void populateList() {
         ArrayList<Movies> moviesArrayList = handler.getAllFavs();
         for (int i = 0; i < moviesArrayList.size(); i++) {
             Movies movies = moviesArrayList.get(i);

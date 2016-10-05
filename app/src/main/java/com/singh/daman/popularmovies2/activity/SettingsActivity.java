@@ -1,4 +1,4 @@
-package com.singh.daman.popularmovies2.Activity;
+package com.singh.daman.popularmovies2.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

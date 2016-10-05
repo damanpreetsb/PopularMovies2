@@ -12,7 +12,7 @@
     android:layout_height="match_parent"
     android:scrollbars="vertical"
     app:layoutManager="GridLayoutManager"
-    tools:context="com.singh.daman.popularmovies2.Activity.MainActivity"
+    tools:context="com.singh.daman.popularmovies2.activity.MainActivity"
    />
 
 </FrameLayout>

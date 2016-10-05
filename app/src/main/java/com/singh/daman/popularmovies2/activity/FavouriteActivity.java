@@ -1,9 +1,9 @@
-package com.singh.daman.popularmovies2.Activity;
+package com.singh.daman.popularmovies2.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.singh.daman.popularmovies2.Fragment.FavouriteFragment;
+import com.singh.daman.popularmovies2.fragment.FavouriteFragment;
 import com.singh.daman.popularmovies2.R;
 
 /**

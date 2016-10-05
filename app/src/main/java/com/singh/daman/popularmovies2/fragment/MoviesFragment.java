@@ -1,4 +1,4 @@
-package com.singh.daman.popularmovies2.Fragment;
+package com.singh.daman.popularmovies2.fragment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,10 +24,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.singh.daman.popularmovies2.Activity.FavouriteActivity;
-import com.singh.daman.popularmovies2.Adapter.MoviesAdapter;
-import com.singh.daman.popularmovies2.Database.DatabaseHandler;
-import com.singh.daman.popularmovies2.Model.Movies;
+import com.singh.daman.popularmovies2.activity.FavouriteActivity;
+import com.singh.daman.popularmovies2.adapter.MoviesAdapter;
+import com.singh.daman.popularmovies2.database.DatabaseHandler;
+import com.singh.daman.popularmovies2.model.Movies;
 import com.singh.daman.popularmovies2.R;
 
 import org.json.JSONArray;
@@ -73,7 +73,7 @@ public class MoviesFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
-            Data();
+            data();
             return true;
         }
         if (id == R.id.action_fav) {
@@ -100,7 +100,7 @@ public class MoviesFragment extends Fragment {
 
         mMoviesAdapter = new MoviesAdapter(getActivity(), id, moviesposter, overview, date, title, vote, mTwoPane, fm);
         mRecyclerView.setAdapter(mMoviesAdapter);
-        Data();
+        data();
 
         return rootView;
     }
@@ -108,10 +108,10 @@ public class MoviesFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Data();
+        data();
     }
 
-    public void PopulateList() {
+    public void populateList() {
         id.clear();
         title.clear();
         moviesposter.clear();
@@ -144,7 +144,7 @@ public class MoviesFragment extends Fragment {
         mMoviesAdapter.notifyDataSetChanged();
     }
 
-    public void Data() {
+    public void data() {
         try {
             final String BASE_URL = "https://api.themoviedb.org/3/movie/";
             final String API_KEY_URL = "api_key=";
@@ -182,7 +182,7 @@ public class MoviesFragment extends Fragment {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            PopulateList();
+                            populateList();
                         }
                     }, new Response.ErrorListener() {
                 @Override

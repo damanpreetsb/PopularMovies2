@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.MainActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,27 +18,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.DetailActivity"
+            android:name=".activity.DetailActivity"
             android:label="@string/details"
-            android:parentActivityName=".Activity.MainActivity">
+            android:parentActivityName=".activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activity.MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
         <activity
-            android:name=".Activity.SettingsActivity"
+            android:name=".activity.SettingsActivity"
             android:label="@string/settings"
-            android:parentActivityName=".Activity.MainActivity">
+            android:parentActivityName=".activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activity.MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
-        <activity android:name=".Activity.FavouriteActivity"
+        <activity android:name=".activity.FavouriteActivity"
             android:label="@string/favourite"
-            android:parentActivityName=".Activity.MainActivity">
+            android:parentActivityName=".activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activity.MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
     </application>
 

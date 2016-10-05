@@ -3,5 +3,5 @@
     android:id="@+id/containerdetail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.singh.daman.popularmovies2.Activity.DetailActivity"
+    tools:context="com.singh.daman.popularmovies2.activity.DetailActivity"
     tools:ignore="MergeRootFrame" />

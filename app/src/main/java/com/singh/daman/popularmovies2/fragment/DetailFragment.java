@@ -1,4 +1,4 @@
-package com.singh.daman.popularmovies2.Fragment;
+package com.singh.daman.popularmovies2.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,9 +31,9 @@ import com.github.paolorotolo.expandableheightlistview.ExpandableHeightListView;
 import com.like.IconType;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
-import com.singh.daman.popularmovies2.Adapter.ReviewsAdapter;
-import com.singh.daman.popularmovies2.Adapter.TrailerAdapter;
-import com.singh.daman.popularmovies2.Database.DatabaseHandler;
+import com.singh.daman.popularmovies2.adapter.ReviewsAdapter;
+import com.singh.daman.popularmovies2.adapter.TrailerAdapter;
+import com.singh.daman.popularmovies2.database.DatabaseHandler;
 import com.singh.daman.popularmovies2.R;
 import com.squareup.picasso.Picasso;
 
@@ -112,8 +112,8 @@ public class DetailFragment extends Fragment {
         title = extras.getString("EXTRA_TITLE");
         final String vote = "Rating:\n" + extras.getString("EXTRA_VOTE") + "/10";
         final String id = extras.getString("EXTRA_ID");
-        Trailer(id);
-        Review(id);
+        trailer(id);
+        review(id);
 
 
         if (date.length() != 0 || overview.length() != 0) {
@@ -179,7 +179,7 @@ public class DetailFragment extends Fragment {
         return shareIntent;
     }
 
-    private void Trailer(final String idstr) {
+    private void trailer(final String idstr) {
         try {
             final String BASE_URL = "http://api.themoviedb.org/3/movie/" + idstr + "/videos?";
             final String API_KEY_URL = "api_key=";
@@ -227,7 +227,7 @@ public class DetailFragment extends Fragment {
         }
     }
 
-    private void Review(final String idstr) {
+    private void review(final String idstr) {
         try {
             final String BASE_URL = "http://api.themoviedb.org/3/movie/" + idstr + "/reviews?";
             final String API_KEY_URL = "api_key=";

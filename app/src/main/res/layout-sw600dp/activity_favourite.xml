@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:baselineAligned="false"
-    tools:context=".Activity.FavouriteActivity">
+    tools:context=".activity.FavouriteActivity">
 
     <FrameLayout
         android:id="@+id/containerfav"

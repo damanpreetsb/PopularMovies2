@@ -1,4 +1,4 @@
-package com.singh.daman.popularmovies2.Adapter;
+package com.singh.daman.popularmovies2.adapter;
 
 import android.app.Activity;
 import android.content.Context;

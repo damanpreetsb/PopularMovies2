@@ -1,4 +1,4 @@
-package com.singh.daman.popularmovies2.Adapter;
+package com.singh.daman.popularmovies2.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,22 +15,21 @@ import android.widget.TextView;
 import com.like.IconType;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
-import com.singh.daman.popularmovies2.Activity.DetailActivity;
-import com.singh.daman.popularmovies2.Database.DatabaseHandler;
-import com.singh.daman.popularmovies2.Fragment.DetailFragment;
+import com.singh.daman.popularmovies2.activity.DetailActivity;
+import com.singh.daman.popularmovies2.database.DatabaseHandler;
+import com.singh.daman.popularmovies2.fragment.DetailFragment;
 import com.singh.daman.popularmovies2.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import static com.singh.daman.popularmovies2.R.layout.movie;
-
 /**
- * Created by daman on 11/9/16.
+ * Created by daman on 29/9/16.
  */
-public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHolder> {
+
+public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.MyViewHolder> {
     private Context mContext;
-    private ArrayList<String> id, moviesposter, overview, date, title, vote;
+    private ArrayList<String> id, moviesposter, overview, date, title, vote, favourite;
     private boolean mTwoPane;
     private FragmentManager fm;
 
@@ -44,8 +43,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
         MyViewHolder(View v) {
             super(v);
             mCardView = (CardView) v.findViewById(R.id.card_view);
-            movietitle = (TextView) v.findViewById(R.id.movie_title);
             imageView = (ImageView) v.findViewById(R.id.grid_image);
+            movietitle = (TextView) v.findViewById(R.id.movie_title);
             btnfav = (LikeButton) v.findViewById(R.id.fav_button);
             btnfav.setIcon(IconType.Star);
             btnfav.setLikeDrawableRes(R.drawable.star_like);
@@ -56,10 +55,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
         }
     }
 
-    public MoviesAdapter(Context c, ArrayList<String> id,
-                         ArrayList<String> moviesposter, ArrayList<String> overview,
-                         ArrayList<String> date, ArrayList<String> title, ArrayList<String> vote,
-                         boolean mTwoPane, FragmentManager fm) {
+    public FavouriteAdapter(Context c, ArrayList<String> id,
+                            ArrayList<String> moviesposter, ArrayList<String> overview,
+                            ArrayList<String> date, ArrayList<String> title, ArrayList<String> vote,
+                            ArrayList<String> favourite, boolean mTwoPane, FragmentManager fm) {
         mContext = c;
         this.id = id;
         this.moviesposter = moviesposter;
@@ -67,15 +66,16 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
         this.date = date;
         this.title = title;
         this.vote = vote;
+        this.favourite = favourite;
         this.mTwoPane = mTwoPane;
         this.fm = fm;
     }
 
     @Override
-    public MoviesAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FavouriteAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v;
         MyViewHolder holder;
-        v = LayoutInflater.from(parent.getContext()).inflate(movie, parent, false);
+        v = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie, parent, false);
         holder = new MyViewHolder(v);
         holder.mCardView.setTag(holder);
         return holder;
@@ -100,10 +100,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
             holder.btnfav.setOnLikeListener(new OnLikeListener() {
                 @Override
                 public void liked(LikeButton likeButton) {
-                    handler.addFavs(idpos,
-                            title.get(holder.getAdapterPosition()), moviesposter.get(holder.getAdapterPosition()),
-                            vote.get(holder.getAdapterPosition()), date.get(holder.getAdapterPosition()),
-                            overview.get(holder.getAdapterPosition()));
+                    handler.deleteFav(idpos);
                     holder.btnfav.setLiked(true);
                 }
 
@@ -127,7 +124,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
                     if (mTwoPane) {
                         DetailFragment fragment = new DetailFragment();
                         fragment.setArguments(extras);
-                        fm.beginTransaction().replace(R.id.movies_detail_container, fragment).commit();
+                        fm.beginTransaction().replace(R.id.fav_movies_detail_container, fragment).commit();
                     } else {
                         Intent intent = new Intent(mContext, DetailActivity.class);
                         intent.putExtras(extras);
